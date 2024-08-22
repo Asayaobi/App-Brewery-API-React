@@ -6,6 +6,7 @@ const port = 3000;
 
 //Step 3 - Make the styling show up.
 //Hint 1: CSS files are static files!
+app.use(express.static('public'))
 //Hint 2: The header and footer are partials.
 //Hint 3: Add the CSS link in header.ejs
 
@@ -16,9 +17,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   //Step 1 - Make the get route work and render the index.ejs file.
+  res.render("index.ejs")
 });
 
 app.post("/submit", (req, res) => {
+  const randomAdj = adj[Math.floor(Math.random()* adj.length)]
+  const randomN = noun[Math.floor(Math.random()* noun.length)]
+  const bandName = randomAdj + " " + randomN
+  res.render("index.ejs",{name: bandName})
   //Step 2 - Make the generate name functionality work
   //Hint: When the "Generate Name" button in index.ejs is clicked, it should hit up this route.
   //Then:
