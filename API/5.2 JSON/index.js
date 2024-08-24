@@ -16,24 +16,37 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("index.ejs",{taco:data});
 });
 
-app.post("/recipe", (req, res) => {
-  if (req.body.choice === 'chicken') {
-    data = recipeObj[0]
-    res.render("index.ejs",{taco:data})
-  } else if (req.body.choice === 'beef') {
-    data = recipeObj[1]
-    res.render("index.ejs",{taco:data})
-  } else if (req.body.choice === 'fish') {
-    data = recipeObj[2]
-    res.render("index.ejs",{taco:data})
-  }
+// app.post("/recipe", (req, res) => {
+//   if (req.body.choice === 'chicken') {
+//     data = recipeObj[0]
+//     res.render("index.ejs",{taco:data})
+//   } else if (req.body.choice === 'beef') {
+//     data = recipeObj[1]
+//     res.render("index.ejs",{taco:data})
+//   } else if (req.body.choice === 'fish') {
+//     data = recipeObj[2]
+//     res.render("index.ejs",{taco:data})
+//   }
 
+  app.post("/recipe", (req, res) => {
+    switch (req.body.choice) {
+      case "chicken":
+      data = recipeObj[0]
+      break;
+      case 'beef': 
+      data = recipeObj[1]
+      break;
+      case 'fish': 
+      data = recipeObj[2]
+      break;
+    }
+    res.redirect('/')
+    })
   //Step 3: Write your code here to make this behave like the solution website.
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
-});
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
