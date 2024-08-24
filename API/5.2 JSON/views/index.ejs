@@ -27,9 +27,13 @@
 
     <h3>Ingredients:</h3>
     <ul id="ingredientsList">
+      <% if (locals.taco) { %>
+        <!-- show items here -->
+        <% } else { %>
       <li>Protein name, protein preparation</li>
       <li>Salsa name</li>
       <li>Every other topping</li>
+      <% } %>
     </ul>
 
 
