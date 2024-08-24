@@ -29,6 +29,9 @@
     <ul id="ingredientsList">
       <% if (locals.taco) { %>
         <!-- show items here -->
+        <li><%= locals.taco.ingredients.protein.name %>, <%= locals.taco.ingredients.protein.preparation %></li>
+        <li><%= locals.taco.ingredients.salsa.name %></li>
+
         <% } else { %>
       <li>Protein name, protein preparation</li>
       <li>Salsa name</li>
