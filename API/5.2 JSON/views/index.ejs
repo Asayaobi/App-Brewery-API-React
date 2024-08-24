@@ -32,6 +32,11 @@
         <li><%= locals.taco.ingredients.protein.name %>, <%= locals.taco.ingredients.protein.preparation %></li>
         <li><%= locals.taco.ingredients.salsa.name %></li>
 
+        <!-- loop the toppings -->
+        <%let toppings = locals.taco.ingredients.toppings%>
+         <%for (let i = 0; i < toppings.length; i ++){%>
+          <li><%= toppings[i].quantity %> of <%= toppings[i].ingredients %></li>
+          <% }%>
         <% } else { %>
       <li>Protein name, protein preparation</li>
       <li>Salsa name</li>
