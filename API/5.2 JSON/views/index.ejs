@@ -35,11 +35,11 @@
         <!-- loop the toppings -->
         <%let toppings = locals.taco.ingredients.toppings%>
          <%for (let i = 0; i < toppings.length; i ++){%>
-          <li><%= toppings[i].quantity %> of <%= toppings[i].ingredients %></li>
+          <li><%= toppings[i].quantity %> of <%= toppings[i].name %></li>
           <% }%>
         <!-- alternative method
         <% toppings.forEach(topping => { %>
-          <li><%= topping.quantity %> of <%= topping.ingredients %></li> 
+          <li><%= topping.quantity %> of <%= topping.name %></li> 
         <% }) %> -->
         <% } else { %>
       <li>Protein name, protein preparation</li>
