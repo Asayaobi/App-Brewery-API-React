@@ -17,6 +17,18 @@ app.get("/", (req, res) => {
 });
 
 app.post("/recipe", (req, res) => {
+  console.log(req.body)
+  console.log(recipeJSON[0])
+  //turn json to object const jsonData = JSON.stringify(yourJSobject)
+  if (req.body.choice === 'chicken') {
+    let jsonData = JSON.stringify(recipeJSON[0])
+    res.render("index.ejs",{taco:jsonData})
+  } else if (req.body.choice === beef) {
+//render data
+  } else if (req.body.choice === fish) {
+//render data
+  }
+
   //Step 3: Write your code here to make this behave like the solution website.
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
 });
