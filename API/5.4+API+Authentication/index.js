@@ -69,17 +69,14 @@ app.get("/apiKey", async (req, res) => {
   //HINT: You need to provide a query parameter of apiKey in the request.
 
   try{
-    axios.get(`${API_URL}filter`, {
+    const response = await axios.get(`${API_URL}filter`, {
       params: {
           apiKey: yourAPIKey,
           score: 5
       }
   })
-  .then(response => {
-      console.log(response.data);
       const jsonData = JSON.stringify(response.data)
       res.render('index.ejs', {content: jsonData})
-  })
   } catch (error){
     console.error("Failed to make request:", error.message)
     res.render("index.ejs", {
