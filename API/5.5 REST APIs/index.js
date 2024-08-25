@@ -36,10 +36,7 @@ app.post("/get-secret", async (req, res) => {
 app.post("/post-secret", async (req, res) => {
   // TODO 2: Use axios to POST the data from req.body to the secrets api servers.
   try{
-    const {data} = await axios.post(`${API_URL}/secrets`, {
-      secret: req.body.secret,
-      score: req.body.score
-    },config)
+    const {data} = await axios.post(`${API_URL}/secrets`, req.body,config)
     res.render("index.ejs", {content:JSON.stringify(data)})
   } catch (error) {
     res.render("index.ejs", { content: JSON.stringify(error.response.data) })
@@ -50,10 +47,7 @@ app.post("/put-secret", async (req, res) => {
   const searchId = req.body.id
   // TODO 3: Use axios to PUT the data from req.body to the secrets api servers.
   try{
-    const {data} = await axios.put(`${API_URL}/secrets/${searchId}`, {
-      secret: req.body.secret,
-      score: req.body.score
-    },config)
+    const {data} = await axios.put(`${API_URL}/secrets/${searchId}`, req.body,config)
     res.render("index.ejs", {content:JSON.stringify(data)})
   } catch (error) {
     res.render("index.ejs", { content: JSON.stringify(error.response.data) })
@@ -64,22 +58,7 @@ app.post("/patch-secret", async (req, res) => {
   const searchId = req.body.id
   // TODO 4: Use axios to PATCH the data from req.body to the secrets api servers.
   try{
-      let body = {}
-  if (req.body.secret && req.body.score){
-    body = {
-      secret: req.body.secret,
-      score: req.body.score
-    }
-  } else if (req.body.secret) {
-    body = {
-      secret: req.body.secret
-        }
-  } else {
-    body = {
-      score: req.body.score
-        }
-  }
-    const {data} = await axios.patch(`${API_URL}/secrets/${searchId}`, body, config)
+    const {data} = await axios.patch(`${API_URL}/secrets/${searchId}`, req.body, config)
     res.render("index.ejs", {content:JSON.stringify(data)})
   } catch (error) {
     res.render("index.ejs", { content: JSON.stringify(error.response.data) })
