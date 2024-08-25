@@ -25,10 +25,7 @@ app.get("/noAuth", async (req, res) => {
     console.log('response', jsonData)
     res.render("index.ejs", { content:jsonData})
   }catch (error) {
-    console.error("Failed to make request:", error.message);
-    res.render("index.ejs", {
-      error: error.message,
-    });
+    res.status(404).send("Error:", error.message,)
   }
 });
 
@@ -56,10 +53,7 @@ app.get("/basicAuth",async (req, res) => {
     console.log('response', jsonData)
     res.render("index.ejs", { content:jsonData})
  }catch (error) {
-  console.error("Failed to make request:", error.message);
-  res.render("index.ejs", {
-    error: error.message,
-  });
+  res.status(404).send("Error:", error.message,)
 }
 });
 
@@ -78,10 +72,7 @@ app.get("/apiKey", async (req, res) => {
       const jsonData = JSON.stringify(response.data)
       res.render('index.ejs', {content: jsonData})
   } catch (error){
-    console.error("Failed to make request:", error.message)
-    res.render("index.ejs", {
-      error: error.message
-    })
+    res.status(404).send("Error:", error.message,)
   }
 });
 
@@ -107,10 +98,7 @@ app.get("/bearerToken", async (req, res) => {
     const jsonData = JSON.stringify(response.data)
     res.render('index.ejs', { content: jsonData})
  } catch (error){
-    console.error("Failed to make request:", error.message)
-    res.render("index.ejs", {
-      error: error.message
-  })
+  res.status(404).send("Error:", error.message,)
 }
  
 });
