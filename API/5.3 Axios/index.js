@@ -34,7 +34,7 @@ app.post("/", async (req, res) => {
   } catch (error){
     console.error("Failed to make request:", error.message)
     res.render("index.ejs", {
-    error: error.message,
+    error: "No activities that match your criteria"
     })
  }
   // Step 2: Play around with the drop downs and see what gets logged.

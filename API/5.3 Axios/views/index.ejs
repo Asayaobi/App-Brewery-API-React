@@ -32,41 +32,37 @@
         <option value="4">4</option>
       </select>
       <button type="submit" class="form-submit">Go</button>
-    </form>
-    <section id="cards" class="cards">
-      <article class="card-item">
+    </form>      
+
+
+    <section id="cards" class="cards"> 
+<!-- /Random   -->   
+      <% if(locals.data){ %>
+      <article class="card-item">         
         <h2 class="card-activity">
           <!-- Show Activity -->
-           <% if(locals.data){ %>
             <%= locals.data.activity%>
-           <% } else{%>
-            <% } %>
         </h2>
         <div class="card-info">
           <span class="card-type">
             <!-- Show Activity type -->
-            <% if(locals.data){ %>
-              <%= locals.data.type%>
-             <% } else {%>
-               <% } %>
+              <%= data.type%>
           </span>
           <span class="card-participants">
             <!-- participants: Show participant number -->
-            <% if(locals.data){ %>
-              <%= locals.data.participants%>
-             <% } else {%>
-              <% } %>
+              <%= data.participants%>
             <span class="card-number"></span>
           </span>
-        </div>
+        </div> 
       </article>
+      <% } %>
 
-
+ 
       <div id="tag-error" class="tag-error">
         <!-- Show any errors that were sent from the backend -->
         <%if (locals.error){%>
-          <%= locals.error%>
-          <% } %>
+            <%= error%>
+        <% } %>
       </div>
 
     </section>
