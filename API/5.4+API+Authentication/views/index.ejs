@@ -58,6 +58,8 @@
     <p>
       <% if (locals.content) { %>
         <%=content%>
+      <%} else if (locals.error){ %>
+        <%=error%>
       <%} %>
       
     </p>
