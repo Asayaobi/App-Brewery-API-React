@@ -20,7 +20,7 @@ app.get("/noAuth", async (req, res) => {
   //The data you get back should be sent to the ejs file as "content"
   //Hint: make sure you use JSON.stringify to turn the JS object from axios into a string.
   try{
-    const response = await axios.get('https://secrets-api.appbrewery.com/random')
+    const response = await axios.get(`${API_URL}random`)
     const jsonData = JSON.stringify(response.data) 
     console.log('response', jsonData)
     res.render("index.ejs", { content:jsonData})
@@ -46,7 +46,7 @@ app.get("/basicAuth",async (req, res) => {
     });
   */
  try {
-    const response = await axios.get('https://secrets-api.appbrewery.com/all?page=2', {
+    const response = await axios.get(`${API_URL}all?page=2`, {
     auth: {
       username: yourUsername,
       password: yourPassword,
@@ -69,7 +69,7 @@ app.get("/apiKey", async (req, res) => {
   //HINT: You need to provide a query parameter of apiKey in the request.
 
   try{
-    axios.get('https://secrets-api.appbrewery.com/filter', {
+    axios.get(`${API_URL}filter`, {
       params: {
           apiKey: yourAPIKey,
           score: 5
@@ -101,7 +101,7 @@ app.get("/bearerToken", async (req, res) => {
   });
   */
  try {
-    const response = await axios.get('https://secrets-api.appbrewery.com/secrets/42', {
+    const response = await axios.get(`${API_URL}secrets/42`, {
       headers: { 
         Authorization: `Bearer ${yourBearerToken}` 
       },
