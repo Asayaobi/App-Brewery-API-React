@@ -27,8 +27,21 @@ app.get("/filter", (req,res) =>{
     const findJokes = jokes.filter((joke) => joke.jokeType === type)
     res.json(findJokes)
 })
-//4. POST a new joke
 
+//4. POST a new joke
+app.post("/jokes", (req,res) =>{
+  //body
+  const newJoke = {
+    id: jokes.length + 1,
+    jokeText: req.body.text,
+    jokeType: req.body.type
+  }
+  //add joke
+  jokes.push(newJoke)
+  //console log the last index of jokes
+  console.log(jokes.slice(-1))
+  res.json(newJoke)
+})
 //5. PUT a joke
 
 //6. PATCH a joke
