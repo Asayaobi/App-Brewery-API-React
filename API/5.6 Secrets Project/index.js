@@ -19,7 +19,8 @@ app.get("/", async (req,res) => {
         const response = await axios.get('https://secrets-api.appbrewery.com/random')
     res.render('index.ejs', {content: response.data})
     } catch (error){
-        console.error("error:", error.message)
+        console.error(error.response.data)
+        res.status(505)
     }
 })
 // 6. Listen on your predefined port and start the server.
