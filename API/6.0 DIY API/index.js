@@ -13,6 +13,13 @@ app.get("/random", (req,res) =>{
   res.json(jokes[randomNum])
 })
 //2. GET a specific joke
+app.get("/jokes/:id", (req,res) =>{
+  //convert a string of req.params.id into an integer number
+  const id = parseInt(req.params.id)
+  //use find method to find the id 
+  const findJoke = jokes.find((joke) => joke.id === id)
+  res.json(findJoke)
+})
 
 //3. GET a jokes by filtering on the joke type
 
