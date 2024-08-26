@@ -43,6 +43,27 @@ app.post("/jokes", (req,res) =>{
   res.json(newJoke)
 })
 //5. PUT a joke
+app.put("/jokes/:id", (req,res) =>{
+//convert a string of req.params.id into an integer number
+  const newId = parseInt(req.params.id)
+//joke body
+  const replaceJoke = {
+    id: newId,
+    jokeText: req.body.text,
+    jokeType: req.body.type
+  } 
+  //use array.findIndex()
+  const findIndex = jokes.findIndex((joke) => joke.id === newId)
+  jokes[findIndex]= replaceJoke  
+res.json(replaceJoke)
+//Alternative solution: use find method to find the id 
+//   const replaceJoke = jokes.find((joke) => {
+//     if(joke.id === id){
+//       joke.jokeText = req.body.text,
+//       joke.jokeType = req.body.type
+//     }
+//   })
+})
 
 //6. PATCH a joke
 
