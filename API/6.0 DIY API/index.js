@@ -56,16 +56,35 @@ app.put("/jokes/:id", (req,res) =>{
   const findIndex = jokes.findIndex((joke) => joke.id === newId)
   jokes[findIndex]= replaceJoke  
 res.json(replaceJoke)
-//Alternative solution: use find method to find the id 
-//   const replaceJoke = jokes.find((joke) => {
-//     if(joke.id === id){
-//       joke.jokeText = req.body.text,
-//       joke.jokeType = req.body.type
-//     }
-//   })
 })
 
 //6. PATCH a joke
+app.patch("/jokes/:id", (req,res) =>{
+  //convert a string of req.params.id into an integer number
+    const paramsId = parseInt(req.params.id)
+  //find the joke object
+    const existingJoke = jokes.find(joke => joke.id === paramsId)
+  //updat the joke or using the same content of the existing joke object if not provided
+    const updateJoke = {
+      id: paramsId,
+      jokeText: req.body.text || existingJoke.jokeText,
+      jokeType: req.body.type || existingJoke.jokeType
+    }
+  //find index
+  const findIndex = jokes.findIndex(joke => joke.id === paramsId)
+  jokes[findIndex] = updateJoke
+  res.json(updateJoke) 
+  //alternative solution
+  // jokes.find((joke) => {
+  //   if (joke.id === newId) {
+  //     if (req.body.text) {
+  //       joke.jokeText = req.body.text
+  //     } else if (req.body.type) {
+  //       joke.jokeType = req.body.type
+  //     }
+  //   }
+  // })  
+})
 
 //7. DELETE Specific joke
 
