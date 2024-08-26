@@ -106,6 +106,19 @@ if (index !== -1) {
 })
 
 //8. DELETE All jokes
+app.delete("/all", (req,res) =>{
+  //check auth of API Key with Key : key
+  const userKey = req.query.key
+  if (masterKey === userKey){
+    jokes = []
+    console.log('jokes',jokes)
+    res.sendStatus(200)
+  } else {
+      res
+        .status(404)
+        .json({error: `your key is not correct`});
+    }
+    })
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
