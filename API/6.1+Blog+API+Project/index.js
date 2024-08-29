@@ -42,6 +42,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //CHALLENGE 1: GET All posts
 app.get("/posts", (req, res) => {
+  if (!posts){
+    return res.status(404).json({message: "Post not found"})
+  }
   res.json(posts)
 })
 
@@ -49,8 +52,12 @@ app.get("/posts", (req, res) => {
 app.get("/posts/:id", (req, res) => {
   const id = parseInt(req.params.id)
   const findPostIndex = posts.findIndex((post) => post.id === id)
+  if (findPostIndex === -1){
+    return res.status(404).json({message: "Post not found"})
+  }
   res.json(posts[findPostIndex])
 })
+
 //CHALLENGE 3: POST a new post
 app.post("/posts", (req,res) => {
  const newPost = {
@@ -62,6 +69,9 @@ app.post("/posts", (req,res) => {
   }
   posts.push(newPost)
   const findPostIndex = posts.findIndex((post) => post.id === newPost.id)
+  if (findPostIndex === -1){
+    return res.status(404).json({message: "Post not found"})
+  }
   res.json(posts[findPostIndex])
 })
 
@@ -70,8 +80,10 @@ app.patch("/posts/:id",(req,res) => {
   //get the post id in the form of INT
   const id = parseInt(req.params.id)
   //get the existing post
-  const findPostIndex = posts.findIndex((post) => post.id === id)
-  let existingPost = posts[findPostIndex]
+  const existingPost = posts.find((post) => post.id === id)
+  if (!existingPost){
+    return res.status(404).json({message: "Post not found"})
+  }
   //create a new body for the updated version
   const updatePost = {
     title: req.body.title || existingPost.title,
