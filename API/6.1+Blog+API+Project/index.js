@@ -44,8 +44,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/posts", (req, res) => {
   res.json(posts)
 })
-//CHALLENGE 2: GET a specific post by id
 
+//CHALLENGE 2: GET a specific post by id
+app.get("/posts/:id", (req, res) => {
+  const id = parseInt(req.params.id)
+  const findPostIndex = posts.findIndex((post) => post.id === id)
+  res.json(posts[findPostIndex])
+})
 //CHALLENGE 3: POST a new post
 
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
