@@ -52,6 +52,18 @@ app.get("/posts/:id", (req, res) => {
   res.json(posts[findPostIndex])
 })
 //CHALLENGE 3: POST a new post
+app.post("/posts", (req,res) => {
+ const newPost = {
+    id: posts.length + 1,
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author,
+    date: new Date()
+  }
+  posts.push(newPost)
+  const findPostIndex = posts.findIndex((post) => post.id === newPost.id)
+  res.json(posts[findPostIndex])
+})
 
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
 
