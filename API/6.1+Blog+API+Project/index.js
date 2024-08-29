@@ -68,11 +68,7 @@ app.post("/posts", (req,res) => {
     date: new Date()
   }
   posts.push(newPost)
-  const findPostIndex = posts.findIndex((post) => post.id === newPost.id)
-  if (findPostIndex === -1){
-    return res.status(404).json({message: "Post not found"})
-  }
-  res.json(posts[findPostIndex])
+  res.status(201).json(newPost)
 })
 
 //CHALLENGE 4: PATCH a post when you just want to update one parameter
@@ -80,7 +76,7 @@ app.patch("/posts/:id",(req,res) => {
   //get the post id in the form of INT
   const id = parseInt(req.params.id)
   //get the existing post
-  const existingPost = posts.find((post) => post.id === id)
+  let existingPost = posts.find(post => post.id === id)
   if (!existingPost){
     return res.status(404).json({message: "Post not found"})
   }
