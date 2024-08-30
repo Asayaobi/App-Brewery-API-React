@@ -17,6 +17,15 @@ const db = new pg.Client({
 //run database
 db.connect()
 
+//defaut data
+let quiz = [
+  { country: "France", capital: "Paris" },
+  { country: "United Kingdom", capital: "London" },
+  { country: "United States of America", capital: "New York" },
+];
+
+let totalCorrect = 0;
+
 //get data from the database
 db.query("SELECT * FROM capitals", (err, res) => {
   if(err){
@@ -27,13 +36,7 @@ db.query("SELECT * FROM capitals", (err, res) => {
   db.end()
 })
 
-let quiz = [
-  { country: "France", capital: "Paris" },
-  { country: "United Kingdom", capital: "London" },
-  { country: "United States of America", capital: "New York" },
-];
 
-let totalCorrect = 0;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
