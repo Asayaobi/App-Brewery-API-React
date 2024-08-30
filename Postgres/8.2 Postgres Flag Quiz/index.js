@@ -15,12 +15,21 @@ const db = new pg.Client({
 
 db.connect()
 
-let totalCorrect = 0;
-
-//default quiz array
+//defaut data
 let quiz = [{name: "Afghanistan", flag:"🇦🇫"}, 
   {name: "Aland Islands", flag:"🇦🇽"}
 ]
+let totalCorrect = 0;
+
+//get data from the database
+db.query("SELECT * FROM flags", (err, res) => {
+  if(err){
+    console.error("Error executing query", err.stack)
+  }else {
+    quiz = res.rows
+  }
+  db.end()
+})
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
