@@ -28,12 +28,12 @@ app.get("/", async (req, res) => {
 
 // POST a new post
 app.post("/submit", (req, res) => {
-  let answer = req.body.answer.trim();
+  let answer = req.body.answer.trim(); //use trim to eliminate extra space
   let isCorrect = false;
-  if (currentQuestion.capital.toLowerCase() === answer.toLowerCase()) {
+  if (currentQuestion.capital.toLowerCase() === answer.toLowerCase()) { //convert the format to lowercase
     totalCorrect++;
     console.log(totalCorrect);
-    isCorrect = true;
+    isCorrect = true;//add the checkmark to the button when it's correct
   }
 
   nextQuestion();
