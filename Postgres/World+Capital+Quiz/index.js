@@ -16,6 +16,17 @@ const pg = new pg.Client({
 
 //run pg
 db.connect()
+
+//get data from the database
+db.query("SELECT * FROM capitals", (err, res) => {
+  if(err){
+    console.error("Error executing query", err.stack)
+  }else {
+    quiz = res.rows
+  }
+  db.end()
+})
+
 let quiz = [
   { country: "France", capital: "Paris" },
   { country: "United Kingdom", capital: "London" },
