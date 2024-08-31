@@ -26,6 +26,7 @@ app.get("/", async (req, res) => {
     //country_codes = [ 'FR', 'US', 'GB' ]
     let country_codes = responseCountries.map(country => country.country_code)
     res.render('index.ejs', {countries: country_codes, total: country_codes.length})
+    db.end()
   } catch (error) {
     console.error(error.message)
   }
