@@ -37,26 +37,37 @@ app.get("/", async (req, res) => {
   }
 });
 
+
 app.post("/add", async (req,res) => {
+  try {
     //capitalize first letter of the input country
     let country
-      country = req.body.country.charAt(0).toUpperCase() + req.body.country.slice(1).toLowerCase()
-      console.log('country', country)
+    country = req.body.country.charAt(0).toUpperCase() + req.body.country.slice(1).toLowerCase()
+    console.log('country', country)
 
     //check the country code from countries table
     let response = await db.query('SELECT country_code FROM countries WHERE country_name = $1', [country])
     console.log('response',response)
-
-    if (response.rows.lenght !== 0){
-      let country_code = response.rows[0].country_code
-
-      //add the country code to visited_countries table
-      await db.query('INSERT INTO visited_countries (country_code) VALUES ($1)',[country_code])
-      //reload the countries with get / after update the country
-      res.redirect("/")
+    // If no rows were returned, handle the error
+    if (response.rowCount === 0) {
+      throw new Error('Country does not exist, try again');
     }
-})
+        
+    let country_code = response.rows[0].country_code
+    //add the country code to visited_countries table
+    await db.query('INSERT INTO visited_countries (country_code) VALUES ($1)',[country_code])
+    //reload the countries with get / after update the country
+    res.redirect("/")
 
+  } catch (error) {
+    console.error(error.message)
+    //throw error, if the country doesn't exist
+    country_codes = await checkVisitedCountries()
+    res.render('index.ejs', {countries: country_codes, total: country_codes.length, error: error.message})
+  }
+
+
+})
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
