@@ -26,7 +26,6 @@ app.get("/", async (req, res) => {
     //country_codes = [ 'FR', 'US', 'GB' ]
     let country_codes = responseCountries.map(country => country.country_code)
     res.render('index.ejs', {countries: country_codes, total: country_codes.length})
-    db.end()
   } catch (error) {
     console.error(error.message)
   }
@@ -34,8 +33,12 @@ app.get("/", async (req, res) => {
 
 app.post("/add", async (req,res) => {
   try{
-    
-  }catch(error){
+    let country
+    //capitalize first letter of the input country
+      country = req.body.country.charAt(0).toUpperCase() + req.body.country.slice(1).toLowerCase()
+      console.log('country', country)
+      
+  } catch(error){
     console.error(error.message)
   }
 })
