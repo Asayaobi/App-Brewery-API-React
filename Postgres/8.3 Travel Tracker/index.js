@@ -18,7 +18,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
-  //Write your code here.
+  try {
+    //Write your code here.
+    let response = await db.query("SELECT country_code FROM visited_countries")
+    let responseCountries = response.rows
+    //responseCountries = [{ country_code: 'FR' },{ country_code: 'US' }, { country_code: 'GB' }]
+    //country_codes = [ 'FR', 'US', 'GB' ]
+    let country_codes = responseCountries.map(country => country.country_code)
+    res.render('index.ejs', {countries: country_codes, total: country_codes.length})
+  } catch (error) {
+    console.error(error.message)
+  }
 });
 
 app.listen(port, () => {
