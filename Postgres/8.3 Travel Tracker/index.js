@@ -37,10 +37,22 @@ app.post("/add", async (req,res) => {
     //capitalize first letter of the input country
       country = req.body.country.charAt(0).toUpperCase() + req.body.country.slice(1).toLowerCase()
       console.log('country', country)
-    //check the country code
+    //check the country code from countries table
     let response = await db.query(`SELECT country_code FROM countries WHERE country_name = '${country}'`)
     console.log('response',response.rows[0])
     let country_code = response.rows[0].country_code
+    //add the country code to visited_countries table
+    let sql = `INSERT INTO visited_countries (country_code) VALUES ($1)`
+    let values = [`${country_code}`]
+    console.log('values', values)
+    let updateCountries = await db.query(sql,values)
+    console.log('updateCountries',updateCountries)
+    //if error
+    if (!updateCountries.rowCount){
+      console.log('cannot post new country')
+    } else {
+      res.redirect("/")
+    }
   } catch(error){
     console.error(error.message)
   }
