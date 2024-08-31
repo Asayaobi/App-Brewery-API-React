@@ -32,6 +32,14 @@ app.get("/", async (req, res) => {
   }
 });
 
+app.post("/add", async (req,res) => {
+  try{
+    
+  }catch(error){
+    console.error(error.message)
+  }
+})
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
