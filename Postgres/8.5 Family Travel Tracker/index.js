@@ -41,13 +41,23 @@ async function checkVisited(currentUserId) {
 console.log('countries',countries)
   return countries;
 }
+
+async function checkColor(currentUserId) {
+  const result = await db.query('SELECT color FROM users WHERE id = $1',[currentUserId]);
+console.log('color',result.rows[0].color)
+  return result.rows[0].color
+}
+
 app.get("/", async (req, res) => {
+  //get user
+  const usersResult = await checkUsers()
+  //get country by user id
   const countries = await checkVisited(currentUserId)
   res.render("index.ejs", {
     countries: countries,
     total: countries.length,
-    users: users,
-    color: "teal",
+    users: usersResult,
+    color: colorResult,
   });
 });
 app.post("/add", async (req, res) => {
