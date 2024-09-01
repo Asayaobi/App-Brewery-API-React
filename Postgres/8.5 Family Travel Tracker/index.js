@@ -17,35 +17,44 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let currentUserId = 1;
-
-let users = [
-  { id: 1, name: "Angela", color: "teal" },
-  { id: 2, name: "Jack", color: "powderblue" },
-];
+let currentUserId = 1
 
 async function checkUsers() {
-  let result = await db.query("SELECT * FROM users")
-  console.log('result checkUser',result.rows)
-  return result.rows
+  try{
+    let result = await db.query("SELECT * FROM users")
+    console.log('result checkUser',result.rows)
+    return result.rows
+  } catch (error) {
+    console.error(error.message)
+  }
 }
 
 async function checkVisited(currentUserId) {
-  console.log('checkVisited UserId',currentUserId)
-  const result = await db.query('SELECT country_code FROM visited_countries WHERE user_id = $1', [currentUserId]);
-  console.log('result from visited country', result.rows)
-  let countries = []
-  result.rows.forEach((country) => {
-    countries.push(country.country_code);
-  })
-console.log('countries',countries)
-  return countries;
+  try {
+    console.log('checkVisited UserId',currentUserId)
+    const result = await db.query('SELECT country_code FROM visited_countries WHERE user_id = $1', [currentUserId])
+
+    //create countries array of country_code
+    let countries = []
+      result.rows.forEach((country) => {
+      countries.push(country.country_code)
+    })
+    console.log('countries',countries)
+    return countries
+
+  } catch (error) {
+    console.error(error.message)
+  }
 }
 
 async function checkColor(currentUserId) {
-  const result = await db.query('SELECT color FROM users WHERE id = $1',[currentUserId]);
-console.log('color',result.rows[0].color)
-  return result.rows[0].color
+  try {
+    const result = await db.query('SELECT color FROM users WHERE id = $1',[currentUserId]);
+    console.log('color',result.rows[0].color)
+    return result.rows[0].color
+  } catch (error) {
+    console.error(error.message)
+  }
 }
 
 app.get("/", async (req, res) => {
