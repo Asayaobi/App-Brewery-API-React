@@ -8,10 +8,10 @@ const port = 3000;
 const db = new pg.Client({
   user: "postgres",
   host: "localhost",
-  database: "world",
-  password: "123456",
+  database: "World",
+  password: "AsayaObi",
   port: 5432,
-});
+})
 db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
