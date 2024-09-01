@@ -18,12 +18,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 let currentUserId = 1
+let users = []
+//users = [{ id: 1, name: 'Asaya', color: 'pink' },{ id: 2, name: 'Achara', color: 'teal' }]
 
 async function checkUsers() {
   try{
     let result = await db.query("SELECT * FROM users")
-    console.log('result checkUser',result.rows)
-    return result.rows
+    users = result.rows
+    return users
   } catch (error) {
     console.error(error.message)
   }
