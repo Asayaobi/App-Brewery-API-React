@@ -76,29 +76,44 @@ app.get("/", async (req, res) => {
 })
 
 app.post("/add", async (req, res) => {
-  const input = req.body["country"];
-
   try {
-    const result = await db.query(
-      "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '%';",
-      [input.toLowerCase()]
-    );
-
-    const data = result.rows[0];
-    const countryCode = data.country_code;
-    try {
-      await db.query(
-        "INSERT INTO visited_countries (country_code, user_id) VALUES ($1, $2)",
-        [countryCode, currentUserId]
-      );
-      res.redirect("/");
-    } catch (err) {
-      console.log(err);
+    let country = req.body.country
+    //check the country code from countries table/ loosely match the country in case of incomplete name or upper/lowercase with LIKE, wildcards
+    let response = await db.query("SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%'|| $1 ||'%'", [country.toLowerCase()])
+    // If country_code is not found, no rows were returned, handle the error
+    if (response.rowCount === 0) {
+      throw new Error('Country does not exist, try again')
     }
-  } catch (err) {
-    console.log(err);
+
+    //add countryCode to visited_countries table
+    let countryCode = response.rows[0].country_code
+    await db.query('INSERT INTO visited_countries (country_code, user_id) VALUES ($1, $2)',[countryCode, currentUserId])
+
+    //in visited_countries table, country_code is set to unique, it'll show an error 'Duplicate key value violates unique constraint' with error.code === '23505'
+    //if countryCode is a new country and get posted, reload the countries with get / after update the country
+    res.redirect("/")
+
+  } catch (error) {
+    console.error(error.message)
+
+    // modify message for 'Duplicate key value violates unique constraint'
+    if (error.code === '23505') {
+      error.message = 'Country has already been added, try again';
+    }
+    //pass all of the data including error message
+    const usersResult = await checkUsers()
+    const countries = await checkVisited(currentUserId)
+    const colorResult = await checkColor(currentUserId)
+    res.render("index.ejs", {
+      countries: countries,
+      total: countries.length,
+      users: usersResult,
+      color: colorResult,
+      error: error.message
+    })
   }
-});
+})
+
 app.post("/user", async (req, res) => {
   //show pages from selected tab bar
   if (req.body.add){
