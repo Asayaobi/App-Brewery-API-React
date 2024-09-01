@@ -79,6 +79,14 @@ app.post("/user", async (req, res) => {
 app.post("/new", async (req, res) => {
   //Hint: The RETURNING keyword can return the data that was inserted.
   //https://www.postgresql.org/docs/current/dml-returning.html
+  console.log('name',req.body.name, req.body.color)
+  //post new user
+  let response = await db.query(`INSERT INTO users (name, color) VALUES ($1, $2)`, [req.body.name, req.body.color])
+  console.log('response', response)
+  //if user is posted, redirect to homepage
+  if (response.rowCount === 1) {
+    res.redirect("/")
+  }
 });
 
 app.listen(port, () => {
