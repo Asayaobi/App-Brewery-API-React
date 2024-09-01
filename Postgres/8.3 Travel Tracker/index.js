@@ -40,13 +40,10 @@ app.get("/", async (req, res) => {
 
 app.post("/add", async (req,res) => {
   try {
-    //capitalize first letter of the input country
-    let country
-    country = req.body.country.charAt(0).toUpperCase() + req.body.country.slice(1).toLowerCase()
-
-    //check the country code from countries table
-    let response = await db.query('SELECT country_code FROM countries WHERE country_name = $1', [country])
-    // If no rows were returned, handle the error
+    let country = req.body.country
+    //check the country code from countries table/ loosely match the country in case of incomplete name or upper/lowercase with LIKE, wildcards
+    let response = await db.query("SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%'|| $1 ||'%'", [country.toLowerCase()])
+    // If country_code is not found, no rows were returned, handle the error
     if (response.rowCount === 0) {
       throw new Error('Country does not exist, try again')
     }
