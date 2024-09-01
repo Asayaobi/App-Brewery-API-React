@@ -24,16 +24,19 @@ let users = [
   { id: 2, name: "Jack", color: "powderblue" },
 ];
 
-async function checkVisisted() {
-  const result = await db.query("SELECT country_code FROM visited_countries");
-  let countries = [];
+async function checkVisited(currentUserId) {
+  console.log('checkVisited UserId',currentUserId)
+  const result = await db.query('SELECT country_code FROM visited_countries WHERE user_id = $1', [currentUserId]);
+  console.log('result from visited country', result.rows)
+  let countries = []
   result.rows.forEach((country) => {
     countries.push(country.country_code);
-  });
+  })
+console.log('countries',countries)
   return countries;
 }
 app.get("/", async (req, res) => {
-  const countries = await checkVisisted();
+  const countries = await checkVisited(currentUserId)
   res.render("index.ejs", {
     countries: countries,
     total: countries.length,
