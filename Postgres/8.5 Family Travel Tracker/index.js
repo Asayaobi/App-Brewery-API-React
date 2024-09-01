@@ -20,11 +20,15 @@ app.use(express.static("public"));
 let currentUserId = 1
 let users = []
 //users = [{ id: 1, name: 'Asaya', color: 'pink' },{ id: 2, name: 'Achara', color: 'teal' }]
+let currentUser 
 
 async function checkUsers() {
   try{
     let result = await db.query("SELECT * FROM users")
+    //get all users
     users = result.rows
+    //get current user
+    currentUser = users.find(user => user.id === Number(currentUserId))
     return users
   } catch (error) {
     console.error(error.message)
@@ -49,27 +53,17 @@ async function checkVisited() {
   }
 }
 
-async function checkColor() {
-  try {
-    const result = await db.query('SELECT color FROM users WHERE id = $1',[currentUserId]);
-    return result.rows[0].color
-  } catch (error) {
-    console.error(error.message)
-  }
-}
-
 app.get("/", async (req, res) => {
   try {
   //get all users to display on the tabs
   const usersResult = await checkUsers()
   //get countries and color with currentUserId
   const countries = await checkVisited()
-  const colorResult = await checkColor()
   res.render("index.ejs", {
     countries: countries,
     total: countries.length,
     users: usersResult,
-    color: colorResult,
+    color: currentUser.color,
   })
   } catch (error) {
     console.error(error.message)
@@ -104,12 +98,11 @@ app.post("/add", async (req, res) => {
     //pass all of the data including error message
     const usersResult = await checkUsers()
     const countries = await checkVisited()
-    const colorResult = await checkColor()
     res.render("index.ejs", {
       countries: countries,
       total: countries.length,
       users: usersResult,
-      color: colorResult,
+      color: currentUser.color,
       error: error.message
     })
   }
