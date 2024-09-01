@@ -377,11 +377,15 @@
     const country_codes = "<%= countries %>".split(",") 
     // countries being pass as string so we convert countries to an array of country_codes with split()
     console.log(typeof ("<%= countries %>"))
+    console.log('get codes', country_codes)
     //every country has its id of country_code so we modify the color by id of country code to teal
     country_codes.forEach(code => {
-      document.getElementById(code).style.fill = 'teal'
+      //if the id exists in the map, update the style color to teal
+      if(document.getElementById(code)){
+        document.getElementById(code).style.fill = 'teal'
+      }
     });
-
+    
   </script>
 </body>
 
