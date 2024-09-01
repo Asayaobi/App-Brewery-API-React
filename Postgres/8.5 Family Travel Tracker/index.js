@@ -115,22 +115,24 @@ app.post("/add", async (req, res) => {
 })
 
 app.post("/user", async (req, res) => {
-  //show pages from selected tab bar
-  if (req.body.add){
-    res.render("new.ejs")
-  }
-  if (req.body.user){
-    console.log('req.body.user id',req.body.user)
+  try {
+    //show pages from selected tab bar
+    if (req.body.add){
+      res.render("new.ejs")
+    }
+    if (req.body.user){
     // set currentUserId
     currentUserId = req.body.user
     //get query for visited countries data of that user
     res.redirect("/")
   }
-});
+  }catch (error) {
+    console.error(error.message)
+  }
+})
 
 app.post("/new", async (req, res) => {
-  //Hint: The RETURNING keyword can return the data that was inserted.
-  //https://www.postgresql.org/docs/current/dml-returning.html
+try {
   console.log('name',req.body.name, req.body.color)
   //post new user
   let response = await db.query(`INSERT INTO users (name, color) VALUES ($1, $2)`, [req.body.name, req.body.color])
@@ -139,8 +141,11 @@ app.post("/new", async (req, res) => {
   if (response.rowCount === 1) {
     res.redirect("/")
   }
-});
+} catch (error) {
+  console.error(error.message)
+}
+})
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
-});
+})
