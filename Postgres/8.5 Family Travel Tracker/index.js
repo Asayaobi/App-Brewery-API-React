@@ -58,9 +58,10 @@ async function checkColor(currentUserId) {
 }
 
 app.get("/", async (req, res) => {
-  //get user
+  try {
+  //get all users to display on the tabs
   const usersResult = await checkUsers()
-  //get country by user id
+  //get countries and color with currentUserId
   const countries = await checkVisited(currentUserId)
   const colorResult = await checkColor(currentUserId)
   res.render("index.ejs", {
@@ -68,8 +69,12 @@ app.get("/", async (req, res) => {
     total: countries.length,
     users: usersResult,
     color: colorResult,
-  });
-});
+  })
+  } catch (error) {
+    console.error(error.message)
+  }
+})
+
 app.post("/add", async (req, res) => {
   const input = req.body["country"];
 
