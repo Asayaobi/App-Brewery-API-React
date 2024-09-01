@@ -71,8 +71,11 @@ app.post("/user", async (req, res) => {
     res.render("new.ejs")
   }
   if (req.body.user){
-    console.log('req.body.user',req.body.user)
+    console.log('req.body.user id',req.body.user)
+    // set currentUserId
+    currentUserId = req.body.user
     //get query for visited countries data of that user
+    res.redirect("/")
   }
 });
 
@@ -82,7 +85,7 @@ app.post("/new", async (req, res) => {
   console.log('name',req.body.name, req.body.color)
   //post new user
   let response = await db.query(`INSERT INTO users (name, color) VALUES ($1, $2)`, [req.body.name, req.body.color])
-  console.log('response', response)
+  console.log('post new user', response)
   //if user is posted, redirect to homepage
   if (response.rowCount === 1) {
     res.redirect("/")
