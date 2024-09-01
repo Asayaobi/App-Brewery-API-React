@@ -24,6 +24,12 @@ let users = [
   { id: 2, name: "Jack", color: "powderblue" },
 ];
 
+async function checkUsers() {
+  let result = await db.query("SELECT * FROM users")
+  console.log('result checkUser',result.rows)
+  return result.rows
+}
+
 async function checkVisited(currentUserId) {
   console.log('checkVisited UserId',currentUserId)
   const result = await db.query('SELECT country_code FROM visited_countries WHERE user_id = $1', [currentUserId]);
