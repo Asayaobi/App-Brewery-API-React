@@ -70,6 +70,10 @@ app.post("/user", async (req, res) => {
   if (req.body.add){
     res.render("new.ejs")
   }
+  if (req.body.user){
+    console.log('req.body.user',req.body.user)
+    //get query for visited countries data of that user
+  }
 });
 
 app.post("/new", async (req, res) => {
