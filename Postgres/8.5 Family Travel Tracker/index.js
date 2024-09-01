@@ -29,10 +29,10 @@ async function checkUsers() {
   }
 }
 
-async function checkVisited(currentUserId) {
+async function checkVisited() {
   try {
     console.log('checkVisited UserId',currentUserId)
-    const result = await db.query('SELECT country_code FROM visited_countries WHERE user_id = $1', [currentUserId])
+    const result = await db.query('SELECT country_code FROM visited_countries JOIN users ON users.id = user_id WHERE user_id = $1', [currentUserId])
 
     //create countries array of country_code
     let countries = []
@@ -47,10 +47,9 @@ async function checkVisited(currentUserId) {
   }
 }
 
-async function checkColor(currentUserId) {
+async function checkColor() {
   try {
     const result = await db.query('SELECT color FROM users WHERE id = $1',[currentUserId]);
-    console.log('color',result.rows[0].color)
     return result.rows[0].color
   } catch (error) {
     console.error(error.message)
@@ -62,8 +61,8 @@ app.get("/", async (req, res) => {
   //get all users to display on the tabs
   const usersResult = await checkUsers()
   //get countries and color with currentUserId
-  const countries = await checkVisited(currentUserId)
-  const colorResult = await checkColor(currentUserId)
+  const countries = await checkVisited()
+  const colorResult = await checkColor()
   res.render("index.ejs", {
     countries: countries,
     total: countries.length,
@@ -102,8 +101,8 @@ app.post("/add", async (req, res) => {
     }
     //pass all of the data including error message
     const usersResult = await checkUsers()
-    const countries = await checkVisited(currentUserId)
-    const colorResult = await checkColor(currentUserId)
+    const countries = await checkVisited()
+    const colorResult = await checkColor()
     res.render("index.ejs", {
       countries: countries,
       total: countries.length,
