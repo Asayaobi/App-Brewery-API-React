@@ -18,17 +18,27 @@ const db = new pg.Client({
 
 db.connect()
 
+//default data
 let items = [
   { id: 1, title: "Buy milk" },
   { id: 2, title: "Finish homework" },
 ];
 
-app.get("/", (req, res) => {
+//function
+async function getItems() {
+  let response = await db.query('SELECT * FROM items')
+  items = response.rows
+  console.log('items', items)
+  return items
+}
+
+app.get("/", async (req, res) => {
+  await getItems()
   res.render("index.ejs", {
     listTitle: "Today",
     listItems: items,
-  });
-});
+  })
+})
 
 app.post("/add", (req, res) => {
   const item = req.body.newItem;
