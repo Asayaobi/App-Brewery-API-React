@@ -40,11 +40,11 @@ app.get("/", async (req, res) => {
   })
 })
 
-app.post("/add", (req, res) => {
-  const item = req.body.newItem;
-  items.push({ title: item });
-  res.redirect("/");
-});
+app.post("/add", async (req, res) => {
+  const item = req.body.newItem
+  await db.query('INSERT INTO items(title) VALUES($1)',[item])
+  res.redirect("/")
+})
 
 app.post("/edit", (req, res) => {});
 
