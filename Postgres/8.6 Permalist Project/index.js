@@ -19,25 +19,19 @@ const db = new pg.Client({
 db.connect()
 
 //default data
-let items = [
-  { id: 1, title: "Buy milk" },
-  { id: 2, title: "Finish homework" },
-];
-
-//function
-async function getItems() {
-  let response = await db.query('SELECT * FROM items')
-  items = response.rows
-  console.log('items', items)
-  return items
-}
+let items = []
 
 app.get("/", async (req, res) => {
-  await getItems()
+  try {
+    let response = await db.query('SELECT * FROM items ORDER BY id ASC')
+    items = response.rows
   res.render("index.ejs", {
     listTitle: "Today",
     listItems: items,
   })
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 app.post("/add", async (req, res) => {
