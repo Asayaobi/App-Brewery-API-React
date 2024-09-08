@@ -39,22 +39,28 @@ app.post("/register", async (req, res) => {
   try {
     const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [
       email,
-    ]);
-
+    ])
     if (checkResult.rows.length > 0) {
-      res.send("Email already exists. Try logging in.");
+      res.send("Email already exists. Try logging in.")
     } else {
-      const result = await db.query(
-        "INSERT INTO users (email, password) VALUES ($1, $2)",
-        [email, password]
-      );
+      //hash the password for storing in the database
+      bcrypt.hash(password, saltRounds, async (err, hashPassword) => {
+        if (err){
+          console.log(err)
+        } else {
+          const result = await db.query(
+          "INSERT INTO users (email, password) VALUES ($1, $2)",
+          [email, hashPassword]
+      )
       console.log(result);
       res.render("secrets.ejs");
+        }
+      })
     }
   } catch (err) {
-    console.log(err);
+    console.log(err)
   }
-});
+})
 
 app.post("/login", async (req, res) => {
   const email = req.body.username;
