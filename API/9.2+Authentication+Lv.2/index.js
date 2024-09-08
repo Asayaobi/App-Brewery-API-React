@@ -63,29 +63,37 @@ app.post("/register", async (req, res) => {
 })
 
 app.post("/login", async (req, res) => {
-  const email = req.body.username;
-  const password = req.body.password;
+  const email = req.body.username
+  const inputPassword = req.body.password
 
   try {
     const result = await db.query("SELECT * FROM users WHERE email = $1", [
       email,
-    ]);
+    ])
     if (result.rows.length > 0) {
-      const user = result.rows[0];
-      const storedPassword = user.password;
-
-      if (password === storedPassword) {
-        res.render("secrets.ejs");
-      } else {
-        res.send("Incorrect Password");
-      }
+      const user = result.rows[0]
+      const storedPassword = user.password
+      //use bcrypt compare method to see if the result is true or false
+      bcrypt.compare(inputPassword, storedPassword, (err, result) => {
+        if (err){
+          console.log(err)
+        }else{
+          //if result is true = password is correct
+          console.log(result)
+          if(result){
+            res.render('secrets.ejs')
+          } else {
+            res.send('password is not correct.')
+          }
+        }
+      })
     } else {
-      res.send("User not found");
+      res.send("User not found")
     }
   } catch (err) {
-    console.log(err);
+    console.log(err)
   }
-});
+})
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
