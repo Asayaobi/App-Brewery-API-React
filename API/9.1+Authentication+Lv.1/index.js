@@ -51,7 +51,28 @@ app.post("/register", async (req, res) => {
   }
 })
 
-app.post("/login", async (req, res) => {});
+app.post("/login", async (req, res) => {
+  const email = req.body.username
+  const password = req.body.password
+  try{
+    //get the password from that user's email, send back user is not found in case email doesn't exist
+    let response = await db.query('SELECT * FROM users WHERE email = $1' , [email])
+    console.log('user detail', response.rows) //[ { id: 1, email: 'user1@email.com', password: '111111' } ]
+  if (response.rowCount === 1){
+   //compare the stored password and input password
+   const storedPassword = response.rows[0].password
+   if (password === storedPassword) {
+    res.render('secrets.ejs')
+   } else {
+    res.send('Password is not correct, please try again')
+   }
+  } else {
+    res.send('user is not found')
+  }
+  } catch (err) {
+    console.log(err)
+  } 
+})
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
