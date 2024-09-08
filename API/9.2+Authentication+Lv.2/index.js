@@ -1,9 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
-import pg from "pg";
+import pg from "pg"
+import bcrypt from "bcrypt"
 
 const app = express();
 const port = 3000;
+//set saltRounds for bcrypt
+const saltRounds = 10
 
 const db = new pg.Client({
   user: "postgres",
