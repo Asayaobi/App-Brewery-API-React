@@ -1,0 +1,6 @@
+SESSION_SECRET="xxxxxx"
+PG_USER="xxxxx"
+PG_HOST="xxxxx"
+PG_DATABASE="xxxx"
+PG_PASSWORD="xxxx"
+PG_PORT="xxxx"
