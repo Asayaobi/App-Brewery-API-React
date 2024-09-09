@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 
 //go directly to secrets page when already logged in
 app.get("/secrets", (req,res) => {
-  //user comes from the verify function in passport strategy
+  //user comes from the verify function in passport strategy in /login and /register 
   console.log(req.user)//{id: 8, email: 'user6@email.com', password: '$2b$10$5kMDTTc7d0jjo.GK/V5sYeBC9FJQ2a5sNAKHyhS7Ua4cis0WQ9DBW'}
   if (req.isAuthenticated()){
     res.render("secrets.ejs")
@@ -78,12 +78,18 @@ app.post("/register", async (req, res) => {
         if (err) {
           console.error("Error hashing password:", err);
         } else {
-          console.log("Hashed Password:", hash);
-          await db.query(
-            "INSERT INTO users (email, password) VALUES ($1, $2)",
+          console.log("Hashed Password:", hash)
+          //RETURNING user data and store it as user
+          const result = await db.query(
+            "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *",
             [email, hash]
-          );
-          res.render("secrets.ejs");
+          )
+          const user = result.rows[0]
+          //instead of res.render("secrets.ejs"), pass 'user' with passport with req.login()
+          req.login(user, (err) => {
+            console.log(err)
+            res.redirect('/secrets')
+          })
         }
       });
     }
