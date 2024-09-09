@@ -2,13 +2,22 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import bcrypt from "bcrypt";
+import session from "express-session"
 
 const app = express();
 const port = 3000;
 const saltRounds = 10;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static("public"))
+
+app.use(session({
+  secret: "TOPSECRETWORD",
+  resave: false, //to save the session to the database but in this case we'll save it to our server
+  saveUninitialized: true //store uninitialize session to our server memory
+
+}))
+
 
 const db = new pg.Client({
   user: "postgres",
