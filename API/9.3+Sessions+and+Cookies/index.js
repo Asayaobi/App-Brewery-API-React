@@ -4,6 +4,7 @@ import pg from "pg";
 import bcrypt from "bcrypt";
 import session from "express-session"
 import passport from "passport";
+import { Strategy } from "passport-local";
 
 const app = express();
 const port = 3000;
@@ -79,29 +80,40 @@ app.post("/login", async (req, res) => {
   const email = req.body.username;
   const loginPassword = req.body.password;
 
+//add stragegy right before app.listen
+passport.use(new Strategy(async function verify(username, password, cb){
+  //1. create new Strategy with a function called verify
+  //2. passing value names that matches the form in ejs file instead of using req.body and a call back
+  //3. code the logic (in this case, it's the same as in /login )
+  console.log(username, password)
   try {
     const result = await db.query("SELECT * FROM users WHERE email = $1", [
-      email,
-    ]);
+      username,
+    ])
     if (result.rows.length > 0) {
-      const user = result.rows[0];
-      const storedHashedPassword = user.password;
-      bcrypt.compare(loginPassword, storedHashedPassword, (err, result) => {
+      const user = result.rows[0]
+      const storedHashedPassword = user.password
+      bcrypt.compare(password, storedHashedPassword, (err, result) => {
         if (err) {
-          console.error("Error comparing passwords:", err);
+          //Error comparing passwords
+          return cb(err)
         } else {
           if (result) {
-            res.render("secrets.ejs");
+            //if success return error as null and data of that user
+            return cb(null, user)
           } else {
-            res.send("Incorrect Password");
+            //when user type Incorrect Password, not an error from passport, set isAuthenticated value to false
+            return cb(null, false)
           }
         }
-      });
+      })
     } else {
-      res.send("User not found");
+      //set the error as "User not found"
+      return cb("User not found")
     }
   } catch (err) {
-    console.log(err);
+    //in case our database query goes wrong
+    return cb(err)
   }
 });
 
