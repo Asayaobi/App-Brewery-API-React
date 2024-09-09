@@ -115,7 +115,16 @@ passport.use(new Strategy(async function verify(username, password, cb){
     //in case our database query goes wrong
     return cb(err)
   }
-});
+}))
+
+//safe the data that the user login to local storage
+passport.serializeUser((user,cb) => {
+  cb(null, user)
+})
+
+passport.deserializeUser((user,cb) => {
+  cb(null, user)
+})
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
