@@ -37,6 +37,17 @@ app.get("/", (req, res) => {
   res.render("home.ejs");
 });
 
+//go directly to secrets page when already logged in
+app.get("/secrets", (req,res) => {
+  //user comes from the verify function in passport strategy
+  console.log(req.user)//{id: 8, email: 'user6@email.com', password: '$2b$10$5kMDTTc7d0jjo.GK/V5sYeBC9FJQ2a5sNAKHyhS7Ua4cis0WQ9DBW'}
+  if (req.isAuthenticated()){
+    res.render("secrets.ejs")
+  } else {
+    res.render("login.ejs")
+  }
+})
+
 app.get("/login", (req, res) => {
   res.render("login.ejs");
 });
@@ -76,9 +87,13 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
-  const email = req.body.username;
-  const loginPassword = req.body.password;
+//use passport instead of (req, res) => {} 
+app.post(
+  "/login", 
+  passport.authenticate("local", {
+  successRedirect: "/secrets",
+  failureRedirect: "/login"
+}))
 
 //add stragegy right before app.listen
 passport.use(new Strategy(async function verify(username, password, cb){
