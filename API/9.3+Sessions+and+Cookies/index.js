@@ -16,8 +16,13 @@ app.use(express.static("public"))
 app.use(session({
   secret: "TOPSECRETWORD",
   resave: false, //to save the session to the database but in this case we'll save it to our server
-  saveUninitialized: true //store uninitialize session to our server memory
-
+  saveUninitialized: true, //store uninitialize session to our server memory
+  //set the expiration
+  cookie: {
+    //1000 miliseconds * 60 = 1 minute
+    //1000 miliseconds * 60 * 60 = 1 hour
+    maxAge: 1000 * 60 * 60 * 24 //1 day
+  }
 }))
 
 //passport module has to go after session
