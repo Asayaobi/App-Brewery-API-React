@@ -66,13 +66,18 @@ app.get("/secrets", (req, res) => {
   }
 });
 
-app.post(
-  "/login",
-  passport.authenticate("local", {
+//callbackURL using google strategy
+app.get("/auth/google/secrets", passport.authenticate("google", {
+  successRedirect: "/secrets",
+  failureRedirect: "/login",
+}))
+
+//login with authenticate using local strategy
+app.post("/login", passport.authenticate("local", {
     successRedirect: "/secrets",
     failureRedirect: "/login",
   })
-);
+)
 
 app.post("/register", async (req, res) => {
   const email = req.body.username;
@@ -106,8 +111,8 @@ app.post("/register", async (req, res) => {
     console.log(err);
   }
 });
-
-passport.use(
+//since we have 2 strategies, name this strategy as local
+passport.use("local",
   new Strategy(async function verify(username, password, cb) {
     try {
       const result = await db.query("SELECT * FROM users WHERE email = $1 ", [
