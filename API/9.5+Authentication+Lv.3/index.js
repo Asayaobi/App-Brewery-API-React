@@ -57,6 +57,13 @@ app.get("/logout", (req, res) => {
   });
 });
 
+//when user log in with Google
+//identify to authenticate with google strategy
+app.get("/auth/google", passport.authenticate("google", {
+  //when the user log in, we want to get profile and email
+  scope: ["profile", "email"],
+})) 
+
 app.get("/secrets", (req, res) => {
   console.log(req.user);
   if (req.isAuthenticated()) {
