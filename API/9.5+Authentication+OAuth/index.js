@@ -79,6 +79,14 @@ app.get("/auth/google/secrets", passport.authenticate("google", {
   failureRedirect: "/login",
 }))
 
+app.get("/logout", (req,res) => {
+  req.logout((err) => {
+    //if there's an error, console log the error, else redirect to homepage
+    if (err) console.log(err)
+    res.redirect("/")
+  })
+})
+
 //login with authenticate using local strategy
 app.post("/login", passport.authenticate("local", {
     successRedirect: "/secrets",
