@@ -150,16 +150,33 @@ passport.use("local",
       console.log(err);
     }
   })
-);
+)
+
 //impliment GoogleStrategy from "passport-google-oauth2" under passport.use
 passport.use("google", new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: "http://localhost:3000/auth/google/secrets",
   userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
-}, async (accessToken, refreshToken, profile, cb) => {
-  //what google profile contains
-  console.log(profile)
+}, async (accessToken, refreshToken, profile, cb) => { 
+  try{
+    //data from google profile
+     console.log(profile)
+    //see if profile.email already exist in our database
+    const checkUser = await db.query('SELECT * FROM users WHERE email = $1', [profile.email])
+    //if no user is found, create a new user
+    if (checkUser.rows.length === 0) {
+      //since we don't store passport some people store profile.id, some store a word google
+      const newUser = await db.query('INSERT INTO users (email, password) VALUES ($1,$2)', [profile.email, "google"])
+      return cb(null, newUser.rows[0])
+    } else {
+      //if we already have the existed user
+      return cb(null, checkUser.rows[0])
+    }
+  } catch (err){
+    //if there's an error, pass it in a callback
+    return cb(err)
+  }
 }))
 
 passport.serializeUser((user, cb) => {
