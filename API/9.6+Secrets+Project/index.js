@@ -56,11 +56,20 @@ app.get("/logout", (req, res) => {
   });
 });
 
-app.get("/secrets", (req, res) => {
+app.get("/secrets", async (req, res) => {
   if (req.isAuthenticated()) {
-    res.render("secrets.ejs");
 
-    //TODO: Update this to pull in the user secret to render in secrets.ejs
+    //getting user's email from user cookie
+    const email = req.user.email
+
+    //check if there's an existed secret in users table
+    let result = await db.query('SELECT secret FROM users WHERE email = $1', [email])
+    const existedSecret = result.rows[0].secret
+    if (existedSecret){
+      res.render("secrets.ejs", {secret: existedSecret})
+    } else {
+      res.render("secrets.ejs", {secret: 'Please submit your secret'})
+    }
   } else {
     res.redirect("/login");
   }
