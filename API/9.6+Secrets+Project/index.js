@@ -63,13 +63,18 @@ app.get("/secrets", async (req, res) => {
     const email = req.user.email
 
     //check if there's an existed secret in users table
-    let result = await db.query('SELECT secret FROM users WHERE email = $1', [email])
+    try{
+      let result = await db.query('SELECT secret FROM users WHERE email = $1', [email])
     const existedSecret = result.rows[0].secret
     if (existedSecret){
       res.render("secrets.ejs", {secret: existedSecret})
     } else {
       res.render("secrets.ejs", {secret: 'Please submit your secret'})
     }
+    } catch (err){
+      console.log(err)
+    }
+    
   } else {
     res.redirect("/login");
   }
