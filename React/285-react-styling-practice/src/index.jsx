@@ -11,3 +11,22 @@
 // to install the node modules and
 // npm run dev
 // to launch your react project in your browser
+
+import React from "react"
+import ReactDOM from "react-dom/client"
+
+//get hour
+let hour = new Date().getHours()
+
+//display message
+let message = ""
+if (hour > 18){
+    message = "Good evening"
+} else if (hour > 12){
+    message = "Good afternoon"
+} else {
+    message = "Good morning"
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(<h1 className="heading">{message}</h1>)
