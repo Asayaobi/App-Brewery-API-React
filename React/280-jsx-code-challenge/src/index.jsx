@@ -11,6 +11,9 @@
 import React from "react"
 import ReactDOM from "react-dom"
 
+//variable
+const year = new Date().getFullYear()  // returns the current year
+
 ReactDOM.render(
     <div>
         <h1>My Favorite Food</h1>
@@ -19,6 +22,8 @@ ReactDOM.render(
             <li>Korean BBQ</li>
             <li>Papaya Salad</li>
         </ul>
+        <p> Created by Asaya Obi</p>
+        <p>Copyright {year}</p>
     </div>
     ,
     document.getElementById("root")
