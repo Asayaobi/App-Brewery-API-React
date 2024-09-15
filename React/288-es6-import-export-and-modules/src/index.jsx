@@ -1,14 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
+import pie, {doublePi, triplePi} from "./math"
 
-ReactDOM.render(
+
+const root = ReactDOM.createRoot(document.getElementById("root"))
+
+//const pi can be called in any name because it's exported by default
+//doublePi, triplePi have to match the original name because it uses export
+//to called doublePi, triplePi, you need () because they are functions
+root.render(
   <ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-  </ul>,
-  document.getElementById("root")
-);
+    <li>{pie}</li>
+    <li>{doublePi()}</li>
+    <li>{triplePi()}</li>
+  </ul>
+)
+
 
 // If you're running this locally in VS Code use the commands:
 // npm install
