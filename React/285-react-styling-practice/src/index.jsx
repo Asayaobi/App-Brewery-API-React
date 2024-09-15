@@ -17,16 +17,23 @@ import ReactDOM from "react-dom/client"
 
 //get hour
 let hour = new Date().getHours()
+//hour = 16
 
+//inline css style
+let customStyle = { color: " " }  
 //display message
-let message = ""
+let message
+
 if (hour > 18){
     message = "Good evening"
+    customStyle.color = "blue"
 } else if (hour > 12){
     message = "Good afternoon"
+    customStyle.color = "green"
 } else {
     message = "Good morning"
+    customStyle.color = "red"
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(<h1 className="heading">{message}</h1>)
+root.render(<h1 className="heading" style={customStyle}>{message}</h1>)
