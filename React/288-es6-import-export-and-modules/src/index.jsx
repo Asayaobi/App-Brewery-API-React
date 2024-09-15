@@ -16,9 +16,14 @@ root.render(
   </ul>
 )
 
-
-// If you're running this locally in VS Code use the commands:
-// npm install
-// to install the node modules and
-// npm run dev
-// to launch your react project in your browser
+//alternative using wild card
+// import * as pi from "./math"
+// console.log(pi) //{doublePie: function doublePi(), triplePie: function triplePi(), default 3.14159}
+// const root = ReactDOM.createRoot(document.getElementById("root"))
+// root.render(
+//   <ul>
+//     <li>{pi.default}</li>
+//     <li>{pi.doublePi()}</li>
+//     <li>{pi.triplePi()}</li>
+//   </ul>
+// )
