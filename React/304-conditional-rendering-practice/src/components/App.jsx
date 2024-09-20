@@ -1,14 +1,14 @@
-import React from "react";
-import Form from "./Form";
+import React from "react"
+import Form from "./Form"
 
-var userIsRegistered = false;
+var userIsRegistered = false
 
 function App() {
   return (
     <div className="container">
-      <Form />
+      <Form userIsRegistered={userIsRegistered}/> 
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
