@@ -1,5 +1,5 @@
 import React from "react"
-import Login from "./LogIn"
+import Login from "./Login"
 
 var isLoggedin = false
 //if the user logged in -> show <h1>Hello</h1>
@@ -10,8 +10,8 @@ currentTime = 11
 function App() {
   return (
     <div className="container">
-      {/* {isLoggedin ? <h1>Hello</h1> : <Login />} */}
-      {currentTime < 12 && <h1>Why are you still working?</h1>}
+      {isLoggedin ? <h1>Hello</h1> : <Login />}
+      {/* {currentTime < 12 && <h1>Why are you still working?</h1>} */}
     </div>
   )
 }
