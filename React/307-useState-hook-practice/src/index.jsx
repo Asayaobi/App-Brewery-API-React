@@ -8,7 +8,6 @@ root.render(<App />)
 //Challenge:
 //1. Given that you can get the current time using:
 let time = new Date().toLocaleTimeString();
-console.log(time);
 //Show the latest time in the <h1> when the Get Time button
 //is pressed.
 
