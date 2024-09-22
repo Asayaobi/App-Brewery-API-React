@@ -7,17 +7,18 @@ function App() {
   })
 
   function handleChange(event){
-    const value = event.target.value //whatever you are typing Y a r o..
-    const input = event.target.name //the name of the input that you're typing fName
+    const {name, value } = event.target
+    // const value = event.target.value //whatever you are typing Y a r o..
+    // const name = event.target.name //the name of the input that you're typing fName
 
     //when passing object, without prevValue, it'll reset the currect value and lose the prev value eg. get firstname and lastname blank
     setfullName(prevValue => {
-      if (input === 'fName'){
+      if (name === 'fName'){
         return {
           fName: value,
           lName: prevValue.lName
         }
-      } else if (input === 'lName') {
+      } else if (name === 'lName') {
         return {
           fName: prevValue.fName,
           lName: value
