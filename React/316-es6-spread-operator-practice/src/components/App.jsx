@@ -31,8 +31,11 @@ function App() {
         </button>
       </div>
       <div>
+      {/* //3. The <ul> should display all the array items as <li> */}
         <ul>
-          <li>A Item</li>
+          {lists.map((l,index) => (
+            <li key={index}>{l}</li>
+          ))}
         </ul>
       </div>
     </div>
