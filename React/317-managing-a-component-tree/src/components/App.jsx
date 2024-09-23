@@ -17,6 +17,17 @@ function App() {
     setInputText("");
   }
 
+  //filter through the previous items, and return the array with all items 
+  //except the item that has index that matches textId
+  function deleteList(textId){
+    console.log('textId that got click', textId)
+    setItems(prevItems => {
+      return prevItems.filter((item, index) => {
+        return index !== textId
+      })
+    })
+  }
+
   return (
     <div className="container">
       <div className="heading">
@@ -30,8 +41,12 @@ function App() {
       </div>
       <div>
        <ul>
-          {items.map(todoItem => (
-            <ToDoItem text={todoItem}/>
+          {items.map((todoItem, index) => (
+            <ToDoItem 
+            key={index}
+            textId={index}
+            text={todoItem}
+            clickList={deleteList}/>
           ))}
         </ul>
       </div>
