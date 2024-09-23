@@ -7,7 +7,9 @@ import CreateArea from "./CreateArea";
 function App() {
   const [notes, setNotes] = useState([])
   function addForm(newNote){
-    setNotes(prevNotes => [...prevNotes, newNote])
+    const allNotes = prevNotes => {return [...prevNotes, newNote]}
+    console.log('allNotes',allNotes)
+    setNotes(allNotes) 
   }
 
   function deleteNote(id){
