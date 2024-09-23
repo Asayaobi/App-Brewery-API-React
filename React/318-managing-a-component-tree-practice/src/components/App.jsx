@@ -15,11 +15,9 @@ function App() {
   }
 
   function deleteItem(id) {
-    setItems(prevItems => {
-      return prevItems.filter((item, index) => {
-        return index !== id;
-      });
-    });
+    const filterItems = items.filter((item, index) => index !== id)
+    console.log('filter items', filterItems)
+    setItems(filterItems)
   }
 
   return (
