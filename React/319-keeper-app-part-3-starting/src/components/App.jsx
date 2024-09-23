@@ -6,15 +6,17 @@ import CreateArea from "./CreateArea";
 
 function App() {
   const [notes, setNotes] = useState([])
+  
+  //receiving newNote from CreateArea.jsx
   function addForm(newNote){
-    const allNotes = prevNotes => {return [...prevNotes, newNote]}
-    console.log('allNotes',allNotes)
+    //putting newNote and the oldNotes in one array
+    const allNotes = prevNotes => [...prevNotes, newNote]
     setNotes(allNotes) 
   }
 
   function deleteNote(id){
     console.log('delete id', id)
-    const filteredNotes =  notes.filter((n, index) => index !== id)
+    const filteredNotes = notes.filter((n, index) => index !== id)
     console.log('filteredNotes',filteredNotes)
     setNotes(filteredNotes)
   }
