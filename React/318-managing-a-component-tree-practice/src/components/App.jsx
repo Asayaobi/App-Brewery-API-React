@@ -3,15 +3,11 @@ import ToDoItem from "./ToDoItem";
 import InputArea from "./InputArea";
 
 function App() {
-  const [inputText, setInputText] = useState("");
   const [items, setItems] = useState([]);
+  const [inputText, setInputText] = useState("")
 
-  function handleChange(event) {
-    const newValue = event.target.value;
-    setInputText(newValue);
-  }
-
-  function addItem() {
+  function addItem(inputText) {
+    console.log('props inputtext', inputText)
     setItems(prevItems => {
       return [...prevItems, inputText];
     });
@@ -31,7 +27,8 @@ function App() {
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <InputArea />
+      <InputArea 
+      addItem={addItem}/>
       <div>
         <ul>
           {items.map((todoItem, index) => (
