@@ -77,7 +77,6 @@
 
      <!-- Post Feature -->
       <section id="post">
-        <form>
         <div class="container-fluid my-5 ps-lg-5 py-lg-5">
             <div class="row d-flex justify-content-md-between">
               <div class="col-lg-6 px-5">
@@ -85,31 +84,32 @@
                     <div>
                         <p class="display-4 fw-bold">Add your Quirky Quote</p>
                     </div>
-
-                    <div>
-                        <label class="fs-3 mb-2">Name</label>
+                    <form action="/addquote" method="POST" class="mb-4">
+                      <div class="mb-3">
+                        <label for="name" class="fs-3 mb-2">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control fs-4 fw-lighter" name="name" placeholder="Bieber Babe"/>
-                          </div>
-                    </div>
-
-                     <div>
-                        <label class="fs-3 mb-2">Profile Picture</label>
+                          <input type="text" class="form-control fs-4 fw-lighter" name="name" placeholder="Bieber Babe" required/>
+                        </div>
+                      </div>
+                    
+                      <div class="mb-3">
+                        <label for="profilepicture" class="fs-3 mb-2">Profile Picture</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control fs-4 fw-lighter" name="profilepic" placeholder="https://shorturl.at/Sur9N"/>
-                          </div>
-                    </div>
-
-                    <div>
-                        <label class="fs-3 mb-2">Quirky Quote</label>
+                          <input type="text" class="form-control fs-4 fw-lighter" name="profilepicture" placeholder="https://shorturl.at/Sur9N"/>
+                        </div>
+                      </div>
+                    
+                      <div class="mb-3">
+                        <label for="quote" class="fs-3 mb-2">Quirky Quote</label>
                         <div class="col-sm-10">
-                            <textarea type="text" class="form-control fs-4 fw-lighter mb-2" name="quote" rows="4" placeholder="I followed my heart… and it led me to the beach bar."></textarea>
-                          </div>
-                    </div>
-
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                        <div><button type="button" class="btn btn-dark btn-lg px-4 me-md-2">Post your Quirky Quote</button></div>
-                    </div>
+                          <textarea class="form-control fs-4 fw-lighter mb-2" name="quote" rows="4" placeholder="I followed my heart… and it led me to the beach bar." required></textarea>
+                        </div>
+                      </div>
+                    
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+                        <button type="submit" class="btn btn-dark btn-lg px-4 me-md-2">Post your Quirky Quote</button>
+                      </div>
+                    </form>
                     
                 </div>      
               </div>
@@ -121,7 +121,6 @@
               </div>
             </div>
           </div>
-        </form>
       </section>
 
      <!-- Testimonial -->
