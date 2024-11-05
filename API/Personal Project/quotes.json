@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "name": "Mr. Winston",
+    "profilepicture": "https://i.postimg.cc/Xv1KW1TP/Screenshot-2567-11-05-at-15-47-35.png",
+    "quote": "I may be drunk, Miss, but in the morning I will be sober and you will still be ugly."
+  },
+  {
+    "id": "2",
+    "name": "Dr. Pepper",
+    "profilepicture": "https://i.postimg.cc/vBPNpvz8/Screenshot-2567-11-05-at-15-53-12.png",
+    "quote": "I cook with wine, sometimes I even add it to the food."
+  },
+  {
+    "id": "3",
+    "name": "Jessi J.",
+    "profilepicture": "https://i.postimg.cc/ZnMXyLBs/Screenshot-2567-11-05-at-15-51-43.png",
+    "quote": "Older people shouldn't eat health food, they need all the preservatives they can get."
+  }
+]
