@@ -11,12 +11,13 @@ const recipeJSON =
 //convert json to javascript object with JSON.parse
 const recipeObj = JSON.parse(recipeJSON)
 let data = {}
+console.log(recipeObj)
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.render("index.ejs",{taco:data});
+  res.render("index.ejs");
 });
 
 // app.post("/recipe", (req, res) => {
@@ -43,7 +44,7 @@ app.get("/", (req, res) => {
       data = recipeObj[2]
       break;
     }
-    res.redirect('/')
+    res.render("index.ejs",{taco:data})
     })
   //Step 3: Write your code here to make this behave like the solution website.
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
