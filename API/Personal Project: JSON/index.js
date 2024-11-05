@@ -4,7 +4,7 @@ import data from './quotes.json' assert { type: 'json' }
 
 //data from quotes.json
 let quotes = data
-console.log('quotes', quotes)
+// console.log('quotes', quotes)
 
 const app = express()
 const port = 3000
@@ -24,31 +24,19 @@ app.get("/", (req, res) => {
 // add new post
 app.post("/addquote", (req, res) => {
   const {name, profilepicture, quote} = req.body
-  let newquote
 
   //random profile pictures
   const pictures = ["https://openmoji.org/data/color/svg/1F49C.svg", "https://openmoji.org/data/color/svg/1F335.svg", "https://openmoji.org/data/color/svg/1F421.svg", "https://openmoji.org/data/color/svg/1F438.svg","https://openmoji.org/data/color/svg/1F9A5.svg"]
   const random = Math.floor(Math.random() * pictures.length)
 
-  if (req.body.profilepicture){
-      newquote = {
+  let newquote = {
       id: quotes.length + 1,
       name: req.body.name,
-      profilepicture: req.body.profilepicture,
+      profilepicture: req.body.profilepicture || pictures[random],
       quote: req.body.quote
     }
-  } else {
-    newquote = {
-      id: quotes.length + 1,
-      name: req.body.name,
-      profilepicture: pictures[random],
-      quote: req.body.quote
-    }
-  }
 
   quotes.push(newquote)
-  console.log(quotes)
-
   res.render("index.ejs",{quotes:quotes})
 })
 
