@@ -170,6 +170,22 @@
                 </div>
 
                 <!-- display new quotes here -->
+                <% if (locals.quotes){ %>
+                  <% let quotes = locals.quotes%>
+                   <% quotes.forEach(quote => {%>
+                    <div class="col">
+                      <div class="card mb-4 rounded-3 shadow-sm py-5 px-3 px-lg-5">
+                          <div class="fs-3 py-3"><%= quote.quote %></div>
+                          <div class="py-5 text-start">
+                              <span class="px-4">
+                                  <img src="<% quote.profilepicture %>" class="rounded-circle" height="100"/>
+                              </span>
+                              <span class="fs-4 fw-lighter"><%= quote.name %></span>
+                          </div>
+                      </div>
+                  </div>
+                  <% }) %>
+                 <% } %>
         
             </div>
 
