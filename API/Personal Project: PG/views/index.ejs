@@ -20,10 +20,10 @@
                 </h4>
         
                 <div class="col-sm-12 col-md-4 d-flex justify-content-md-end gap-2">
-                    <a href="#hero"><button class="btn btn-dark btn-lg">Home</button> </a>
                     <a href="#features"><button class="btn btn-dark btn-lg">Features</button></a>
                     <a href="#post"><button class="btn btn-dark btn-lg text-nowrap">Add Quote</button></a>
                     <a href="#visitors"><button class="btn btn-dark btn-lg">Visitors</button></a>
+                    <a href="#"><button class="btn btn-dark btn-lg text-nowrap" id= "darkmode">Dark Mode</button> </a>
                 </div>
             </header>
           </div>
@@ -194,5 +194,22 @@
       </div>
  </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- javascript -->
+  <script type="text/javascript">
+    // dark mode
+    function toDark() {
+      if (document.querySelector("html").hasAttribute("data-bs-theme")){
+        document.querySelector("html").removeAttribute("data-bs-theme")
+        document.querySelector("#darkmode").innerHTML = "Dark Mode"
+        document.querySelector("#darkmode").setAttribute("class","btn btn-dark darkmode")
+      } else {
+        document.querySelector("html").setAttribute("data-bs-theme","dark")
+        document.querySelector("#darkmode").innerHTML = "Light Mode"
+        document.querySelector("#darkmode").setAttribute("class","btn btn-light darkmode")
+      }
+    }
+    document.querySelector('#darkmode').addEventListener("click", toDark)
+
+  </script>
 </body>
 </html>
