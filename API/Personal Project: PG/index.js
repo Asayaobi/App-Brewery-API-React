@@ -38,22 +38,24 @@ app.get("/", async (req, res) => {
 })
 
 // add new post
-app.post("/addquote", (req, res) => {
-  const {name, profilepicture, quote} = req.body
+app.post("/addquote", async (req, res) => {
+  let {name, profilepicture, quote} = req.body
 
-  //random profile pictures
+  //add random profile pictures
   const pictures = ["https://openmoji.org/data/color/svg/1F49C.svg", "https://openmoji.org/data/color/svg/1F335.svg", "https://openmoji.org/data/color/svg/1F421.svg", "https://openmoji.org/data/color/svg/1F438.svg","https://openmoji.org/data/color/svg/1F9A5.svg"]
   const random = Math.floor(Math.random() * pictures.length)
+  if (profilepicture.length == 0){
+    profilepicture = pictures[random]
+  }
+  console.log('new post-->',name,profilepicture,quote)
 
-  let newquote = {
-      id: quotes.length + 1,
-      name: req.body.name,
-      profilepicture: req.body.profilepicture || pictures[random],
-      quote: req.body.quote
-    }
-
-  quotes.push(newquote)
-  res.render("index.ejs",{quotes:quotes})
+  let response = await db.query(
+    `INSERT INTO quotes(name, profilepicture, quote) VALUES($1, $2, $3) RETURNING *`,
+    [name, profilepicture, quote]
+  )
+  console.log(response.rows)
+  await getQuotes()
+  res.render("index.ejs",{quotes:pgquotes})
 })
 
 app.listen(port, () => {
