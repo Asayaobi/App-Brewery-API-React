@@ -1,20 +1,19 @@
 import express from "express"
 import bodyParser from "body-parser"
 import pg from "pg"
+import dotenv from "dotenv"
 
 //create a connection
+dotenv.config()
+
 const db = new pg.Client({
-  user: "xxxxxx",
-  host: "xxxxxx",
-  database: "xxxxxx",
-  password: "xxxxxx",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 })
 db.connect()
-
-//data from quotes.json
-let quotes = data
-// console.log('quotes', quotes)
 
 //data from pg
 let pgquotes
