@@ -19,9 +19,9 @@ db.connect()
 let pgquotes
 //function
 async function getQuotes() {
-  let response = await db.query("SELECT * FROM quotes")
+  let response = await db.query("SELECT * FROM quotes ORDER BY id")
     pgquotes = response.rows
-    console.log('pg',pgquotes)
+    // console.log('pg',pgquotes)
     return pgquotes
 }
 
@@ -47,7 +47,7 @@ app.post("/addquote", async (req, res) => {
   if (profilepicture.length == 0){
     profilepicture = pictures[random]
   }
-  console.log('new post-->',name,profilepicture,quote)
+  // console.log('new post-->',name,profilepicture,quote)
 
   let response = await db.query(
     `INSERT INTO quotes(name, profilepicture, quote) VALUES($1, $2, $3) RETURNING *`,
