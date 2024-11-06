@@ -15,14 +15,18 @@ const db = new pg.Client({
 })
 db.connect()
 
-//data from pg
+//data from database
 let pgquotes
-//function
+// Function to get quotes from the database
 async function getQuotes() {
-  let response = await db.query("SELECT * FROM quotes ORDER BY id")
+  try {
+    let response = await db.query("SELECT * FROM quotes ORDER BY id")
     pgquotes = response.rows
-    // console.log('pg',pgquotes)
     return pgquotes
+  } catch (error) {
+    console.error("Error fetching quotes:", error)
+    throw error
+  }
 }
 
 const app = express()
@@ -33,8 +37,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 //render quotes in index.ejs
 app.get("/", async (req, res) => {
-  await getQuotes()
-  res.render("index.ejs",{quotes:pgquotes})
+  try {
+    await getQuotes()
+    res.render("index.ejs", { quotes: pgquotes })
+  } catch (error) {
+    console.error("Error loading quotes:", error)
+    res.status(500).send("Error loading quotes.")
+  }
 })
 
 // add new post
@@ -49,12 +58,18 @@ app.post("/addquote", async (req, res) => {
   }
   // console.log('new post-->',name,profilepicture,quote)
 
-  let response = await db.query(
-    `INSERT INTO quotes(name, profilepicture, quote) VALUES($1, $2, $3) RETURNING *`,
-    [name, profilepicture, quote]
-  )
-  console.log(response.rows)
-  await getQuotes()
+  try {
+    let response = await db.query(
+      `INSERT INTO quotes(name, profilepicture, quote) VALUES($1, $2, $3) RETURNING *`,
+      [name, profilepicture, quote]
+    )
+    // console.log("New quote inserted:", response.rows)
+    await getQuotes()
+    res.render("index.ejs", { quotes: pgquotes })
+  } catch (error) {
+    console.error("Error adding new quote:", error)
+    res.status(500).send("Error adding new quote.")
+  }
   res.render("index.ejs",{quotes:pgquotes})
 })
 
