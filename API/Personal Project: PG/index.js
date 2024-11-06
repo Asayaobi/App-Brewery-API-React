@@ -1,24 +1,41 @@
 import express from "express"
 import bodyParser from "body-parser"
-import data from './quotes.json' assert { type: 'json' }
+import pg from "pg"
+
+//create a connection
+const db = new pg.Client({
+  user: "xxxxxx",
+  host: "xxxxxx",
+  database: "xxxxxx",
+  password: "xxxxxx",
+  port: 5432,
+})
+db.connect()
 
 //data from quotes.json
 let quotes = data
 // console.log('quotes', quotes)
 
+//data from pg
+let pgquotes
+//function
+async function getQuotes() {
+  let response = await db.query("SELECT * FROM quotes")
+    pgquotes = response.rows
+    console.log('pg',pgquotes)
+    return pgquotes
+}
+
 const app = express()
 const port = 3000
-
-//without assert { type: 'json' } -> you need to convert json to javascript object with JSON.parse
-// const quotes = JSON.parse(quotesJSON)
-// console.log('quotes',quotes)
 
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 //render quotes in index.ejs
-app.get("/", (req, res) => {
-  res.render("index.ejs",{quotes:quotes})
+app.get("/", async (req, res) => {
+  await getQuotes()
+  res.render("index.ejs",{quotes:pgquotes})
 })
 
 // add new post
