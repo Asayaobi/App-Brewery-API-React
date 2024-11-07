@@ -12,7 +12,7 @@ function Post() {
               </div>
               <form action="/addquote" method="POST" className="mb-4">
                 <div className="mb-3">
-                  <label for="name" className="fs-3 mb-2">
+                  <label htmlFor="name" className="fs-3 mb-2">
                     Name
                   </label>
                   <div className="col-sm-12">
@@ -22,13 +22,13 @@ function Post() {
                       name="name"
                       placeholder="Bieber Babe"
                       required
-                      maxlength="100"
+                      maxLength="100"
                     />
                   </div>
                 </div>
 
                 <div className="mb-3">
-                  <label for="profilepicture" className="fs-3 mb-2">
+                  <label htmlFor="profilepicture" className="fs-3 mb-2">
                     Profile Picture
                   </label>
                   <div className="col-sm-12">
@@ -42,7 +42,7 @@ function Post() {
                 </div>
 
                 <div className="mb-3">
-                  <label for="quote" className="fs-3 mb-2">
+                  <label htmlFor="quote" className="fs-3 mb-2">
                     Quirky Quote
                   </label>
                   <div className="col-sm-12">
@@ -51,7 +51,7 @@ function Post() {
                       name="quote"
                       rows="4"
                       placeholder="I followed my heart… and it led me to the beach bar."
-                      maxlength="800"
+                      maxLength="800"
                       required
                     ></textarea>
                   </div>
