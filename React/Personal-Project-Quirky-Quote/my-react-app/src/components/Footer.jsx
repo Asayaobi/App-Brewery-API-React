@@ -14,7 +14,7 @@ function Footer() {
               target="_blank"
               className="mx-2"
             >
-              Asaya G.
+              <span className="nowrap">Asaya G.</span>
             </a>
           </span>
         </div>
