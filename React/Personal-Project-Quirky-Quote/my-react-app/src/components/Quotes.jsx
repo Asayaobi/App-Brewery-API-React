@@ -5,6 +5,7 @@ import Card from "./Card"
 function Quotes() {
   // console.log('quotes', quotes)
   return (
+    <section id="visitors">
     <div className="container-fluid px-5 py-5">
       <div className="px-lg-5 pt-5">
         <p className="display-4 fw-bold">Quotes from Visitors</p>
@@ -22,6 +23,7 @@ function Quotes() {
       )}
       </div>
     </div>
+    </section>
   )
 }
 
