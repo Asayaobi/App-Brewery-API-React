@@ -60,7 +60,7 @@ function Post() {
                 <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3 py-3">
                   <button
                     type="submit"
-                    className="btn btn-dark btn-lg px-4 me-md-2 fs-2"
+                    className="btn btn-dark btn-lg px-4 me-md-2 fs-2 border-white"
                   >
                     Post your Quirky Quote
                   </button>

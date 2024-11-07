@@ -4,7 +4,7 @@ function Card(props) {
     // console.log('props',props)
     return (
         <div className="col">
-          <div className="card mb-4 rounded-3 shadow-sm py-5 px-3 px-lg-5">
+          <div className="card mb-4 rounded-3 shadow-sm py-5 px-3 px-lg-5 border-white">
             <div className="fs-3 py-3">
               {props.text}
             </div>

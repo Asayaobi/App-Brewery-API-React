@@ -18,7 +18,7 @@ function Hero() {
             together!
           </p>
           <a href="#post">
-            <button type="button" className="btn btn-dark btn-lg px-4 mb-5 fs-2">
+            <button type="button" className="btn btn-dark btn-lg px-4 mb-5 fs-2 border-white">
               Share your Quote
             </button>
           </a>
