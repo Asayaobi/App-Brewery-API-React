@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Header() {
+  const [isDark, setDark] = useState(false)
+
   function toDark() {
-    if (document.querySelector("html").hasAttribute("data-bs-theme")){
-      document.querySelector("html").removeAttribute("data-bs-theme")
-      document.querySelector("#darkmode").innerHTML = "Dark Mode"
-      document.querySelector("#darkmode").setAttribute("class","btn btn-dark btn-lg text-nowrap darkmode")
-    } else {
+    if (!isDark){
+      setDark(true)
+      // console.log('dark theme')
       document.querySelector("html").setAttribute("data-bs-theme","dark")
-      document.querySelector("#darkmode").innerHTML = "Light Mode"
-      document.querySelector("#darkmode").setAttribute("class","btn btn-dark btn-lg text-nowrap darkmode")
+    } else {
+      setDark(false)
+      document.querySelector("html").removeAttribute("data-bs-theme")
+      // console.log('light theme')
     }
   }
-  // document.querySelector('#darkmode').addEventListener("click", toDark)
+
   return (
     <section>
       <div className="container-fluid px-lg-5">
@@ -33,17 +35,17 @@ function Header() {
 
           <div className="col-sm-12 col-md-4 d-flex justify-content-md-end gap-2">
             <a href="#features">
-              <button className="btn btn-dark btn-lg">Features</button>
+              <button className="btn btn-dark btn-lg border-white">Features</button>
             </a>
             <a href="#post">
-              <button className="btn btn-dark btn-lg text-nowrap">Add Quote</button>
+              <button className="btn btn-dark btn-lg text-nowrap border-white">Add Quote</button>
             </a>
             <a href="#visitors">
-              <button className="btn btn-dark btn-lg">Visitors</button>
+              <button className="btn btn-dark btn-lg border-white">Visitors</button>
             </a>
             <a href="#">
-              <button onClick={toDark} className="btn btn-dark btn-lg text-nowrap darkmode">
-                Dark Mode
+              <button onClick={toDark} className="btn btn-dark btn-lg text-nowrap border-white">
+                {isDark ? "Light Mode" : "Dark Mode"}
               </button>
             </a>
           </div>
