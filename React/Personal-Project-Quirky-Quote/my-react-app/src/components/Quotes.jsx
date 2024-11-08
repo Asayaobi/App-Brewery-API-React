@@ -1,9 +1,9 @@
 import React from "react"
-import quotes from "../quotes"
 import Card from "./Card"
 
-function Quotes() {
-  // console.log('quotes', quotes)
+function Quotes(props) {
+  // console.log('props all quotes', props)
+  const quotes = props.quotes
   return (
     <section id="visitors">
     <div className="container-fluid px-5 py-5">
