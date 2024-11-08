@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import quotes from "../quotes"
+import Quotes from "./Quotes"
 
 function Post() {
   //defaut quote data from quotes.js
@@ -60,6 +61,7 @@ function Post() {
         // }, [allQuotes])
 
   return (
+    <>
     <section id="post">
       <div className="container-fluid my-5 ps-lg-5 py-lg-5">
         <div className="row d-flex justify-content-md-between">
@@ -146,6 +148,8 @@ function Post() {
         </div>
       </div>
     </section>
+    <Quotes quotes={allQuotes}/>
+    </>
   )
 }
 
