@@ -27,12 +27,16 @@ function Post() {
 
     function handleSubmit(event){
       event.preventDefault()
-      console.log('all quotes prev data --->', allQuotes)
+
+      //add random picture to empty picture input
+      const pictures = ["https://openmoji.org/data/color/svg/1F49C.svg", "https://openmoji.org/data/color/svg/1F335.svg", "https://openmoji.org/data/color/svg/1F421.svg", "https://openmoji.org/data/color/svg/1F438.svg","https://openmoji.org/data/color/svg/1F9A5.svg"]
+      const random = Math.floor(Math.random() * pictures.length)
+
       //add new quote
       setAllQuotes([...allQuotes, {
-        id:allQuotes.length + 1, 
+        id: allQuotes.length + 1, 
         name: name,
-        profilepicture: picture,
+        profilepicture: picture ? picture : pictures[random],
         quote: text
   }])
       //reset the value in the form
@@ -42,18 +46,18 @@ function Post() {
     }
 
         // This logs the updated value whenever it changes.
-        useEffect(() => {
-          console.log('Updated name:', name)
-        }, [name])
-        useEffect(() => {
-          console.log('Updated pic:', picture)
-        }, [picture])
-        useEffect(() => {
-          console.log('Updated text:', text)
-        }, [text])
-        useEffect(() => {
-          console.log('Updated allquotes:', allQuotes)
-        }, [allQuotes])
+        // useEffect(() => {
+        //   console.log('Updated name:', name)
+        // }, [name])
+        // useEffect(() => {
+        //   console.log('Updated pic:', picture)
+        // }, [picture])
+        // useEffect(() => {
+        //   console.log('Updated text:', text)
+        // }, [text])
+        // useEffect(() => {
+        //   console.log('Updated allquotes:', allQuotes)
+        // }, [allQuotes])
 
   return (
     <section id="post">
