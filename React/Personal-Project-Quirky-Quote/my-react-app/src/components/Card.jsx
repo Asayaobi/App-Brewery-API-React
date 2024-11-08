@@ -10,14 +10,14 @@ function Card(props) {
             </div>
 
             <div className="py-5 row row-cols-1 row-cols-md-2 d-flex align-items-center">
-              <div>
+              <div className="col-lg-5">
                 <img
                   src={props.img}
                   className="rounded-circle"
                   height="100"
                 />
               </div>
-              <span className="fs-4 fw-light text-nowrap">{props.name}</span>
+              <div className="fs-4 fw-light text-nowrap col-lg-7">{props.name}</div>
 
             </div>
           </div>
