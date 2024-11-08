@@ -1,6 +1,10 @@
 import React from "react"
 
 function Post() {
+  function handleSubmit(event){
+    event.preventDefault()
+    console.log('form submitted')
+  }
   return (
     <section id="post">
       <div className="container-fluid my-5 ps-lg-5 py-lg-5">
@@ -10,7 +14,8 @@ function Post() {
               <div>
                 <p className="display-4 fw-bold">Add your Quirky Quote</p>
               </div>
-              <form action="/addquote" method="POST" className="mb-4">
+
+              <form onSubmit={handleSubmit} className="mb-4">
                 <div className="mb-3">
                   <label htmlFor="name" className="fs-3 mb-2">
                     Name
