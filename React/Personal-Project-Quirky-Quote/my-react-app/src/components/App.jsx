@@ -3,7 +3,6 @@ import Header from "./Header"
 import Hero from "./Hero"
 import Features from "./Features"
 import Post from "./Post"
-import Quotes from "./Quotes"
 import Footer from "./Footer"
 
 function App() {
@@ -13,7 +12,6 @@ function App() {
         <Hero />
         <Features />
         <Post />
-        <Quotes />
         <Footer />
     </div>
   )
