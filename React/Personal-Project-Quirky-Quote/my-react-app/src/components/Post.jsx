@@ -1,6 +1,37 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 
 function Post() {
+  const [name, setName] = useState('')
+  const [picture, setPicture] = useState('')
+  const [text, setText] = useState('')
+
+
+  function handleInput(event){
+    if (event.target.name === 'name'){
+      const nameValue = event.target.value
+      setName(nameValue)
+    }
+    if (event.target.name === 'profilepicture'){
+      const picValue = event.target.value
+      setPicture(picValue)
+    }
+    if (event.target.name === 'quote'){
+      const textValue = event.target.value
+      setText(textValue)    
+    }
+  }
+
+  // This logs the updated input value whenever it changes.
+  useEffect(() => {
+    console.log('Updated name:', name)
+  }, [name])
+  useEffect(() => {
+    console.log('Updated pic:', picture)
+  }, [picture])
+  useEffect(() => {
+    console.log('Updated text:', text)
+  }, [text])
+
   function handleSubmit(event){
     event.preventDefault()
     console.log('form submitted')
@@ -22,6 +53,7 @@ function Post() {
                   </label>
                   <div className="col-sm-12">
                     <input
+                      onChange={handleInput}
                       type="text"
                       className="form-control fs-4 fw-lighter"
                       name="name"
@@ -38,6 +70,7 @@ function Post() {
                   </label>
                   <div className="col-sm-12">
                     <input
+                      onChange={handleInput}
                       type="text"
                       className="form-control fs-4 fw-lighter"
                       name="profilepicture"
@@ -52,6 +85,7 @@ function Post() {
                   </label>
                   <div className="col-sm-12">
                     <textarea
+                      onChange={handleInput}
                       className="form-control fs-4 fw-lighter mb-2"
                       name="quote"
                       rows="4"
