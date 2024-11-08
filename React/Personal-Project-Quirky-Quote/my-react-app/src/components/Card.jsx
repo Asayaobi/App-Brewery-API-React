@@ -13,7 +13,7 @@ function Card(props) {
               <div className="col-lg-5">
                 <img
                   src={props.img}
-                  className="rounded-circle"
+                  className="rounded-circle bg-light"
                   height="100"
                 />
               </div>
