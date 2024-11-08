@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react"
+import quotes from "../quotes"
 
 function Post() {
+  //defaut quote data from quotes.js
+  let quotesData = quotes
+
   const [name, setName] = useState('')
   const [picture, setPicture] = useState('')
   const [text, setText] = useState('')
-
+  const [allQuotes, setAllQuotes] = useState(quotesData)
 
   function handleInput(event){
     if (event.target.name === 'name'){
@@ -21,21 +25,36 @@ function Post() {
     }
   }
 
-  // This logs the updated input value whenever it changes.
-  useEffect(() => {
-    console.log('Updated name:', name)
-  }, [name])
-  useEffect(() => {
-    console.log('Updated pic:', picture)
-  }, [picture])
-  useEffect(() => {
-    console.log('Updated text:', text)
-  }, [text])
+    function handleSubmit(event){
+      event.preventDefault()
+      console.log('all quotes prev data --->', allQuotes)
+      //add new quote
+      setAllQuotes([...allQuotes, {
+        id:allQuotes.length + 1, 
+        name: name,
+        profilepicture: picture,
+        quote: text
+  }])
+      //reset the value in the form
+      setName('')
+      setPicture('')
+      setText('')
+    }
 
-  function handleSubmit(event){
-    event.preventDefault()
-    console.log('form submitted')
-  }
+        // This logs the updated value whenever it changes.
+        useEffect(() => {
+          console.log('Updated name:', name)
+        }, [name])
+        useEffect(() => {
+          console.log('Updated pic:', picture)
+        }, [picture])
+        useEffect(() => {
+          console.log('Updated text:', text)
+        }, [text])
+        useEffect(() => {
+          console.log('Updated allquotes:', allQuotes)
+        }, [allQuotes])
+
   return (
     <section id="post">
       <div className="container-fluid my-5 ps-lg-5 py-lg-5">
@@ -55,6 +74,7 @@ function Post() {
                     <input
                       onChange={handleInput}
                       type="text"
+                      value={name}//  to clear the input on reset
                       className="form-control fs-4 fw-lighter"
                       name="name"
                       placeholder="Bieber Babe"
@@ -71,6 +91,7 @@ function Post() {
                   <div className="col-sm-12">
                     <input
                       onChange={handleInput}
+                      value={picture}//  to clear the input on reset
                       type="text"
                       className="form-control fs-4 fw-lighter"
                       name="profilepicture"
@@ -86,6 +107,7 @@ function Post() {
                   <div className="col-sm-12">
                     <textarea
                       onChange={handleInput}
+                      value={text}//  to clear the input on reset
                       className="form-control fs-4 fw-lighter mb-2"
                       name="quote"
                       rows="4"
