@@ -27,7 +27,7 @@ const quotes = [
       id: 5,
       name: "Dr. Pepper",
       profilepicture: "https://i.postimg.cc/vBPNpvz8/Screenshot-2567-11-05-at-15-53-12.png",
-      quote: "I cook with wine, sometimes I even add it to the food."
+      quote: "A man who correctly guesses a woman’s age may be smart, but he’s not very bright."
     }
   ]
   
