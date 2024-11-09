@@ -15,6 +15,7 @@ function Quotes(props) {
         {quotes.map(quote => (
           <Card 
             key={quote.id}
+            id={quote.id}
             text={quote.quote}
             img={quote.profilepicture}
             name={quote.name}
