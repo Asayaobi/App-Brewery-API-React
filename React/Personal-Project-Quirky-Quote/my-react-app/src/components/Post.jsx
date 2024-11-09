@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react"
-import quotes from "../quotes"
-import Quotes from "./Quotes"
 
-function Post() {
-  //defaut quote data from quotes.js
-  let quotesData = quotes
+function Post(props) {
+  //defaut quote data from App.jsx
+  // console.log('props from Post',props.quotes)
+  let quotesData = props.quotes
 
   const [name, setName] = useState('')
   const [picture, setPicture] = useState('')
@@ -40,6 +39,7 @@ function Post() {
         profilepicture: picture ? picture : pictures[random],
         quote: text
   }])
+
       //reset the value in the form
       setName('')
       setPicture('')
@@ -56,12 +56,13 @@ function Post() {
         // useEffect(() => {
         //   console.log('Updated text:', text)
         // }, [text])
-        // useEffect(() => {
-        //   console.log('Updated allquotes:', allQuotes)
-        // }, [allQuotes])
+        useEffect(() => {
+          // console.log('Updated allquotes:', allQuotes)
+          //send back the update quotes to App.jsx
+          props.updateData(allQuotes)
+        }, [allQuotes])
 
   return (
-    <>
     <section id="post">
       <div className="container-fluid my-5 ps-lg-5 py-lg-5">
         <div className="row d-flex justify-content-md-between">
@@ -148,8 +149,6 @@ function Post() {
         </div>
       </div>
     </section>
-    <Quotes quotes={allQuotes}/>
-    </>
   )
 }
 
