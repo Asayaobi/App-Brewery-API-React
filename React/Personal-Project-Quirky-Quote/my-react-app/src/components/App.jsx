@@ -1,20 +1,20 @@
-import React from "react"
+import React, {useState} from "react"
 import Header from "./Header"
 import Hero from "./Hero"
 import Features from "./Features"
 import Post from "./Post"
+import Quotes from "./Quotes"
 import Footer from "./Footer"
 import quotes from "../quotes"
 
 
 function App() {
-  let data = quotes
-  console.log('data',data)
+  console.log('original data from js file',quotes)
+  const [data, setData] = useState(quotes)
 
   function postQuote(updateQuotes){
     console.log('quotes update from post', updateQuotes)
-    data = updateQuotes
-    console.log('new data', data)
+    setData(updateQuotes)
   }
 
   return (
@@ -23,6 +23,7 @@ function App() {
         <Hero />
         <Features />
         <Post quotes={data} updateData={postQuote}/>
+        <Quotes quotes={data}/>
         <Footer />
     </div>
   )
