@@ -1,20 +1,28 @@
-import React from "react"
+import React, { useState } from "react"
 
 function Card(props) {
     // console.log('props',props)
+    const [opacity, setOpacity] = useState({ opacity: 0.3 })
+
+    function handleClick(event){
+      const id = event.target.name
+      setOpacity({ opacity: 0.8 })
+      props.addId(id)
+    }
+
     return (
         <div className="col">
-          <div className="card mb-4 rounded-3 shadow-sm border-white">
+          <div className="card mb-4 rounded-3 shadow-sm border-warning">
           
           <div className="d-flex justify-content-end">
-            <button className="icon-link icon-link-hover p-0 border-0 bg-transparent">
+            <button className="icon-link icon-link-hover p-0 border-0 bg-transparent" onClick={handleClick}>
             <img 
-                  src="https://openmoji.org/data/color/svg/1F49A.svg" 
+                  src="https://openmoji.org/data/color/svg/1F49B.svg" 
                   height="50" 
                   width="50"
-                  style={{ opacity: 0.3 }}
+                  style={opacity}
+                  name={props.id}
                 />
-                <div className="visually-hidden">{props.id}</div>
               </button>
             </div>
 
