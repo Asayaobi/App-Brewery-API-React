@@ -8,7 +8,12 @@ function Card(props) {
           
           <div className="d-flex justify-content-end">
             <button className="icon-link icon-link-hover p-0 border-0 bg-transparent">
-                <img src="https://openmoji.org/data/color/svg/1F49F.svg" height="50" width="50"/>
+            <img 
+                  src="https://openmoji.org/data/color/svg/1F49A.svg" 
+                  height="50" 
+                  width="50"
+                  style={{ opacity: 0.3 }}
+                />
                 <div className="visually-hidden">{props.id}</div>
               </button>
             </div>

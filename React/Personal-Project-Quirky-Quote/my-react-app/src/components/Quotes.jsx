@@ -9,6 +9,9 @@ function Quotes(props) {
     <div className="container-fluid px-5 py-5">
       <div className="px-lg-5 pt-5">
         <p className="display-4 fw-bold">Quotes from Visitors</p>
+        <p className="mb-4 fs-2 fw-lighter py-4">
+        Heart your favorite quotes to make them shine in our Featured page!
+          </p>
       </div>
 
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 my-5 text-center px-lg-5">
