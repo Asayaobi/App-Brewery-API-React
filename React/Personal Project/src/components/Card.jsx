@@ -5,9 +5,14 @@ function Card(props) {
     const [opacity, setOpacity] = useState({ opacity: 0.3 })
 
     function handleClick(event){
+      // console.log('quote count', props.quotesCount)
+      //prevent sending more than 3 favorite quotes
+      if (props.quotesCount < 3){
       const id = event.target.name
       setOpacity({ opacity: 0.8 })
       props.addId(id)
+      }
+      
     }
 
     return (

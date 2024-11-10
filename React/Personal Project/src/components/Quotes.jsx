@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState} from "react"
 import Card from "./Card"
 
 function Quotes(props) {
   const quotes = props.quotes
+  const [count, setCount] = useState(0)
 
   function favoriteQuote(id){
     //from Card
@@ -10,6 +11,11 @@ function Quotes(props) {
 
     //sent to App component
     props.getIds(id)
+
+    //prevent sending more than 3 favorite quotes
+    if (count < 3){
+      setCount(count+1)
+    }
   }
 
   return (
@@ -31,6 +37,7 @@ function Quotes(props) {
             img={quote.profilepicture}
             name={quote.name}
             addId={favoriteQuote}
+            quotesCount={count}
           />
         )
       )}
