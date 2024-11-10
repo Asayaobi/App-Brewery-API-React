@@ -9,21 +9,37 @@ import quotes from "../quotes"
 
 
 function App() {
-  console.log('original data from js file',quotes)
+  // console.log('original data from js file',quotes)
   const [data, setData] = useState(quotes)
+  const [favIds, setFavIds] = useState([])
 
+  // update data from Post
   function postQuote(updateQuotes){
-    console.log('quotes update from post', updateQuotes)
+    console.log('App: quotes update from post', updateQuotes)
     setData(updateQuotes)
   }
 
+  //pin favorite quotes for Features page
+  //get the ids when the user mark it in Quotes page
+  function getIds(QuoteId) {
+    console.log('quote id in App', QuoteId)
+
+    if (favIds.length === 0) {
+      setFavIds([QuoteId])
+    } else {
+      setFavIds((prevId) => [...prevId,QuoteId])
+    }
+
+  }
+  
   return (
     <div>
+      <h1>{favIds}</h1>
         <Header />
         <Hero />
-        <Features />
+        <Features/>
         <Post quotes={data} updateData={postQuote}/>
-        <Quotes quotes={data}/>
+        <Quotes quotes={data} getIds={getIds}/>
         <Footer />
     </div>
   )
