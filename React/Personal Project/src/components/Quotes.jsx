@@ -2,25 +2,41 @@ import React, { useState} from "react"
 import Card from "./Card"
 
 function Quotes(props) {
+  //receive props from Apps
   const quotes = props.quotes
-  const [count, setCount] = useState(0)
+
+  //check how many feature quote is currently chosen
+  let prevCount = quotes.reduce((acc, quote) => {
+    if (quote.feature) {
+      acc += 1
+    }
+    return acc
+  }, 0)
+  // console.log('prev count ', prevCount)
+  const [count, setCount] = useState(prevCount)
 
   function favoriteQuote(id){
-    //from Card
     // console.log('id from Card to Quotes Component:',id)
 
-    //sent to App component
-    // console.log('id',id)
-    const favQuote = quotes.find(quote => quote.id == id)
-    // console.log('favQuote',favQuote)
-    props.getQuote(favQuote)
+    //1. check if that id is already chosen
+    const foundQuote = quotes.find(quote => quote.id == id && quote.feature)
+    // console.log('found',foundQuote)
 
-    //prevent sending more than 3 favorite quotes
-    if (count < 3){
-      setCount(count+1)
+    //2. if yes, toggle the quote.feature property
+    if (foundQuote) {
+      setCount(count-1)
+      props.getId(id)
+      // console.log('count-')
     }
-  }
 
+    //3. if the id is new & prevent sending more than 3 favorite quotes
+     else if (count < 3){
+      props.getId(id)
+      setCount(count+1)
+      // console.log('count+')
+    } 
+  }
+ 
   return (
     <section id="visitors">
     <div className="container-fluid px-5 py-5">
@@ -36,11 +52,11 @@ function Quotes(props) {
           <Card 
             key={quote.id}
             id={quote.id}
+            feature={quote.feature}
             text={quote.quote}
             img={quote.profilepicture}
             name={quote.name}
             addId={favoriteQuote}
-            quotesCount={count}
           />
         )
       )}
