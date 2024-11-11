@@ -1,8 +1,13 @@
 import React from "react"
 
 function Features(props) {
-  const favQuotes = props.favQuotes
-  // console.log('features',favQuotes)
+  const data = props.quotes
+  let favQuotes = data.filter(quote => {
+    if (quote.feature){
+      return quote
+    } 
+  })
+  console.log('feature:', favQuotes)
   return (
     <section id="features">
       <div className="container-fluid mt-5 py-5 bg-light px-lg-5">
