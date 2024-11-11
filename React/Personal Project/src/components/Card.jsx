@@ -1,18 +1,11 @@
 import React, { useState } from "react"
 
 function Card(props) {
-    // console.log('props',props)
-    const [opacity, setOpacity] = useState({ opacity: 0.3 })
 
     function handleClick(event){
-      // console.log('quote count', props.quotesCount)
-      //prevent sending more than 3 favorite quotes
-      if (props.quotesCount < 3){
+      //send id to Quotes component
       const id = event.target.name
-      setOpacity({ opacity: 0.8 })
-      props.addId(id)
-      }
-      
+      props.addId(id)      
     }
 
     return (
@@ -25,7 +18,7 @@ function Card(props) {
                   src="https://openmoji.org/data/color/svg/1F49B.svg" 
                   height="50" 
                   width="50"
-                  style={opacity}
+                  style={props.feature ? {opacity: 0.8} : {opacity: 0.3}}
                   name={props.id}
                 />
               </button>
