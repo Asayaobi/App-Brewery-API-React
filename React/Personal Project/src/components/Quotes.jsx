@@ -10,7 +10,10 @@ function Quotes(props) {
     // console.log('id from Card to Quotes Component:',id)
 
     //sent to App component
-    props.getIds(id)
+    // console.log('id',id)
+    const favQuote = quotes.find(quote => quote.id == id)
+    // console.log('favQuote',favQuote)
+    props.getQuote(favQuote)
 
     //prevent sending more than 3 favorite quotes
     if (count < 3){

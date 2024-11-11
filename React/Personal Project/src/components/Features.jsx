@@ -1,6 +1,8 @@
 import React from "react"
 
-function Features() {
+function Features(props) {
+  const favQuotes = props.favQuotes
+  // console.log('features',favQuotes)
   return (
     <section id="features">
       <div className="container-fluid mt-5 py-5 bg-light px-lg-5">
@@ -15,10 +17,11 @@ function Features() {
                 alt="pastel pink fashion image"
               />
               <div className="card-body text-dark">
-                <h5 className="fs-3">Will's Quote</h5>
+                <h5 className="fs-3">{(favQuotes[0]?.name || "Will")}'s Quote</h5>
                 <p className="fs-4 fw-lighter">
-                  "Before you marry a person, you should first make them use a
-                  computer with slow Internet to see who they really are."
+                  "{(favQuotes[0]?.quote || 
+                    "Before you marry a person, you should first make them use a computer with slow Internet to see who they really are."
+                    )}"
                 </p>
               </div>
             </div>
@@ -29,11 +32,14 @@ function Features() {
                 alt="coconut with pastel background image"
               />
               <div className="card-body text-dark">
-                <h5 className="fs-3">Emma's Quote</h5>
+                <h5 className="fs-3">{(favQuotes[1]?.name || "Emma")}'s Quote</h5>
                 <p className="fs-4 fw-lighter">
-                  "When your mother asks, 'Do you want a piece of advice?'. It
+                  "
+                {(favQuotes[1]?.quote || `When your mother asks, 'Do you want a piece of advice?'. It
                   doesn't matter if you answer yes or no. You're going to get it
-                  anyway."
+                  anyway.`
+                  )}
+                  "
                 </p>
               </div>
             </div>
@@ -44,10 +50,12 @@ function Features() {
                 alt="bottle with mint background image"
               />
               <div className="card-body text-dark">
-                <h5 className="fs-3">Phil's Quote</h5>
+                <h5 className="fs-3">{(favQuotes[2]?.name || "Phil")}'s Quote</h5>
                 <p className="fs-4 fw-lighter">
-                  "I want my children to have all the things I couldn't afford.
-                  Then I want to move in with them."
+                  "
+                  {(favQuotes[2]?.quote || 
+                  "I want my children to have all the things I couldn't afford.Then I want to move in with them."
+                  )} "
                 </p>
               </div>
             </div>
