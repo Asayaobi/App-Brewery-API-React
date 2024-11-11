@@ -7,7 +7,7 @@ function Features(props) {
       return quote
     } 
   })
-  console.log('feature:', favQuotes)
+  // console.log('feature:', favQuotes)
   return (
     <section id="features">
       <div className="container-fluid mt-5 py-5 bg-light px-lg-5">
