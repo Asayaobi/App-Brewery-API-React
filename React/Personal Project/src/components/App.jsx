@@ -6,6 +6,7 @@ import Post from "./Post"
 import Quotes from "./Quotes"
 import Footer from "./Footer"
 import quotes from "../quotes"
+import NavBar from "./NavBar"
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
 
   return (
     <div>
-        <Header />
+        <NavBar />
         <Hero />
         <Features quotes={data}/>
         <Post quotes={data} updateData={postQuote}/>
