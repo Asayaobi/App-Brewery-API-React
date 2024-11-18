@@ -26,7 +26,7 @@ function Hero() {
           </a>
           <img
             src="https://i.postimg.cc/c4ZzSbmM/mint-bg.png"
-            className="img-fluid border rounded-3 shadow-lg my-5"
+            className="img-fluid border rounded-3 shadow-lg my-lg-5 my-md-3"
             alt="cactus with mint background"
             width="100%"
             height="100%"
