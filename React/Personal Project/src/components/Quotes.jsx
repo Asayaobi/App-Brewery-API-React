@@ -47,7 +47,7 @@ function Quotes(props) {
           </p>
       </div>
 
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 my-5 text-center px-lg-5">
+      <div className="row row-cols-md-1 row-cols-lg-2 row-cols-xl-3 my-5 text-center px-lg-5">
         {quotes.map(quote => (
           <Card 
             key={quote.id}
