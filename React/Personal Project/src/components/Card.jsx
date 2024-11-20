@@ -24,7 +24,7 @@ function Card(props) {
               </button>
             </div>
 
-            <div className="fs-3 py-3 px-3 px-lg-5">
+            <div className="fs-3 py-3 px-5">
               {props.text}
             </div>
 
