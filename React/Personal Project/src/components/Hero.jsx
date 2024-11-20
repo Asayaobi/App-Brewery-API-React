@@ -20,7 +20,7 @@ function Hero() {
           <a href="#post">
             <div className="rows w-100 mb-5">
               <button type="button" className="btn btn-dark btn-lg fs-2 border-white col-md-12 col-lg-3">
-              Share your Quote
+              Post a Quote
             </button>
             </div>
           </a>
