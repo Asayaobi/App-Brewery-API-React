@@ -2,32 +2,31 @@ import React, { useEffect, useState } from "react";
 
 function Buttons(props) {
   const currentIndex = props.currentIndex;
-  //   console.log("props:", currentIndex);
+  //   console.log("props from App:", currentIndex);
   const [index, setIndex] = useState(currentIndex);
 
   function minusIndex() {
-    if (index > 1) {
-      const updateIndex = index - 1;
+    if (currentIndex > 1) {
+      const updateIndex = currentIndex - 1;
       setIndex(updateIndex);
     }
   }
 
   function addIndex() {
-    if (index < 150) {
-      const updateIndex = index + 1;
+    if (currentIndex < 150) {
+      const updateIndex = currentIndex + 1;
       setIndex(updateIndex);
     }
   }
-
   //logData
   useEffect(() => {
-    console.log("set index", index);
+    // console.log("set index", index);
     //pass updated index back to App.js
     props.getIndex(index);
   }, [index]);
 
   return (
-    <div class="buttons-container">
+    <div className="buttons-container">
       <button onClick={minusIndex}>Previous</button>
       <button onClick={addIndex}>Next</button>
     </div>
