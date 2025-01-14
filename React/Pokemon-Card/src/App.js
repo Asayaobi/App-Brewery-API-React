@@ -7,6 +7,7 @@ import {
 import Select from "../components/Select";
 import "../styles/styles.css";
 import Card from "../components/Card/Card";
+import Buttons from "../components/Buttons";
 
 export default function App() {
   const [pokemonList, setPokemonList] = useState([]);
@@ -75,9 +76,9 @@ export default function App() {
     setPokemonIndex(select);
   }
 
-  //for buttons
   function getButtonsIndex(index) {
-    console.log("button index", index);
+    // console.log("button index", index);
+    setPokemonIndex(index);
   }
 
   return (

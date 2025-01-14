@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 function Buttons(props) {
   const currentIndex = props.currentIndex;
-  console.log("props:", currentIndex);
+  //   console.log("props:", currentIndex);
   const [index, setIndex] = useState(currentIndex);
 
   function minusIndex() {
@@ -22,6 +22,8 @@ function Buttons(props) {
   //logData
   useEffect(() => {
     console.log("set index", index);
+    //pass updated index back to App.js
+    props.getIndex(index);
   }, [index]);
 
   return (
