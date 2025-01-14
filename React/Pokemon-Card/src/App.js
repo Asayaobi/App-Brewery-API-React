@@ -75,10 +75,16 @@ export default function App() {
     setPokemonIndex(select);
   }
 
+  //for buttons
+  function getButtonsIndex(index) {
+    console.log("button index", index);
+  }
+
   return (
     <div className="app">
       <Select onChange={handleSelect}>{pokemonNames}</Select>
       <Card pokemon={pokemon} />
+      <Buttons getIndex={getButtonsIndex} currentIndex={pokemonIndex} />
     </div>
   );
 }
