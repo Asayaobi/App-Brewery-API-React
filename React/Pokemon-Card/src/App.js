@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getPokemonList, getPokemonDescription } from "../api/utils";
+import {
+  getPokemonList,
+  getPokemonDescription,
+  getPokemonSpriteUrl,
+} from "../api/utils";
 import Select from "../components/Select";
 import "../styles/styles.css";
 import Card from "../components/Card/Card";
-
-// async function logData() {
-//   const list = await getPokemonList();
-//   console.log(list);
-
-//   const pokemon = await getPokemonDescription();
-//   console.log(pokemon);
-// }
-
-// logData();
 
 export default function App() {
   const [pokemonList, setPokemonList] = useState([]);
@@ -27,36 +21,38 @@ export default function App() {
   //initial data
   useEffect(() => {
     async function getData() {
-      const apiData = await getPokemonList();
+      const apiName = await getPokemonList();
+      const apiUrl = await getPokemonSpriteUrl(1);
       const apiText = await getPokemonDescription(1);
-      if (apiData.length > 0 && apiText) {
+      if (apiName && apiText) {
         setPokemon({
-          name: apiData[0].name,
-          url: apiData[0].url,
+          name: apiName[0].name,
+          url: apiUrl,
           description: apiText,
         });
       }
-      setPokemonList(apiData);
+      setPokemonList(apiName);
     }
     getData();
   }, []);
 
   //logData
-  useEffect(() => {
-    console.log("set pokemon", pokemon);
-  }, [pokemon]);
-  useEffect(() => {
-    console.log("set index", pokemonIndex);
-  }, [pokemonIndex]);
+  // useEffect(() => {
+  //   console.log("set pokemon", pokemon);
+  // }, [pokemon]);
+  // useEffect(() => {
+  //   console.log("set index", pokemonIndex);
+  // }, [pokemonIndex]);
 
   //when select a pokemon
   useEffect(() => {
     async function resetPokemon() {
+      const apiUrl = await getPokemonSpriteUrl(pokemonIndex);
       const apiText = await getPokemonDescription(pokemonIndex);
       if (pokemonList.length > 0 && apiText) {
         setPokemon({
           name: pokemonList[pokemonIndex - 1].name,
-          url: pokemonList[pokemonIndex - 1].url,
+          url: apiUrl,
           description: apiText,
         });
       }
@@ -82,7 +78,7 @@ export default function App() {
   return (
     <div className="app">
       <Select onChange={handleSelect}>{pokemonNames}</Select>
-      <Card />
+      <Card pokemon={pokemon} />
     </div>
   );
 }
