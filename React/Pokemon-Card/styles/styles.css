@@ -52,3 +52,23 @@ body {
   font-size: 16px;
   line-height: 128%;
 }
+
+.buttons-container {
+  /* margin-top: 18px; */
+  margin-bottom: 18px;
+  height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+button {
+  background-color: rgb(157, 152, 241);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  width: fit-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  flex-basis: 200px;
+}

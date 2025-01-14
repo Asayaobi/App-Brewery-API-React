@@ -27,7 +27,7 @@ function Buttons(props) {
   }, [index]);
 
   return (
-    <div>
+    <div class="buttons-container">
       <button onClick={minusIndex}>Previous</button>
       <button onClick={addIndex}>Next</button>
     </div>
