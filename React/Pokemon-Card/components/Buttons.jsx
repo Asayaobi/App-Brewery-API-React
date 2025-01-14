@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Buttons(props) {
   const currentIndex = props.currentIndex;
+  console.log("props:", currentIndex);
+  const [index, setIndex] = useState(currentIndex);
 
   function minusIndex() {
-    console.log("click");
+    if (index > 1) {
+      const updateIndex = index - 1;
+      setIndex(updateIndex);
+    }
   }
 
-  function addIndex(currentIndex) {
-    console.log("click");
+  function addIndex() {
+    if (index < 150) {
+      const updateIndex = index + 1;
+      setIndex(updateIndex);
+    }
   }
+
+  //logData
+  useEffect(() => {
+    console.log("set index", index);
+  }, [index]);
 
   return (
     <div>
