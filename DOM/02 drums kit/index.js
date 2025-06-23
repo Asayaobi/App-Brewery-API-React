@@ -8,4 +8,11 @@ const handleClick = () => alert('I got clicked!')
 //     })
 // }
 
-
+//play sound
+// document.querySelector('.w').addEventListener('click', function () {
+//     const audio = new Audio('sounds/tom-1.mp3')
+//     audio.play()
+// })
+document.querySelectorAll('.drum').forEach(b => b.addEventListener('click', function () {
+    const audio = new Audio('sounds/tom-1.mp3')
+    audio.play()}))
