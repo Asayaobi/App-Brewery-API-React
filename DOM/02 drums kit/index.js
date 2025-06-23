@@ -73,3 +73,8 @@ document.querySelectorAll('.drum').forEach(button => button.addEventListener('cl
         console.log(buttonHTML) //else log this keyword
     }
 }))
+
+//add event listener to keyboard with keydown
+document.addEventListener('keydown', function(event){
+    console.log(event) //KeyboardEvent {isTrusted: true, key: 'g', code: 'KeyG', location: 0, ctrlKey: false, …}
+})
