@@ -45,6 +45,11 @@ const playSound = (key) => {
 const buttonAnimation = (key) => {
     const activeButton = document.querySelector(`.${key}`)
     activeButton.classList.add('pressed')
+    
+    //after 10sec, remove the styling class after 100milisec.
+    setTimeout(function(){
+        activeButton.classList.remove('pressed')
+    }, 100)
 }
 
 //addEventListener for click -> event.target.innerHTML = 'w'
