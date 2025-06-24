@@ -41,13 +41,21 @@ const playSound = (key) => {
     }
 }
 
-//with click
+//add animation to the button (class pressed) -> document.querySelector('.w').classList.add('pressed')
+const buttonAnimation = (key) => {
+    const activeButton = document.querySelector(`.${key}`)
+    activeButton.classList.add('pressed')
+}
+
+//addEventListener for click -> event.target.innerHTML = 'w'
 document.querySelectorAll('.drum').forEach(button => button.addEventListener('click', function(event){
     playSound(event.target.innerHTML)
+    buttonAnimation(event.target.innerHTML)
 }))
-//with keydown
+//addEventListener for keydown -> event.key = 'w'
 document.addEventListener('keydown', function(event) {
     playSound(event.key)
+    buttonAnimation(event.key)
 })
 
 
