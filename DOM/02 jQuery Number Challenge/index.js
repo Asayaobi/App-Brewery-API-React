@@ -4,9 +4,8 @@ console.log(number)
 //initial score
 let score = 20
 
-//get the guess number
-$('.check').click(function() {
-    console.log($('.guess').val())
+//check the guess number
+const checkNumber = () => {
     let guessNumber = $('.guess').val()
 //compare result
     if (number == guessNumber){
@@ -22,8 +21,7 @@ $('.check').click(function() {
         score--
         $('.score').text(score)
     }
-})
-
+}
 
 
 
