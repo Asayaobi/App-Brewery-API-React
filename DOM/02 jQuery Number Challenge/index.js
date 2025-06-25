@@ -2,8 +2,20 @@
 const number = Math.ceil(Math.random() * 20)
 console.log(number)
 
-
-
+//get the guess number
+$('.check').click(function() {
+    console.log($('.guess').val())
+    let guessNumber = $('.guess').val()
+//compare result
+    if (number == guessNumber){
+        $('body').css('background-color', 'green')
+        $('.message').text('correct!')
+    } else if (number > guessNumber) {
+        $('.message').text('too low')
+    } else {
+        $('.message').text('too high')
+    }
+})
 
 
 
