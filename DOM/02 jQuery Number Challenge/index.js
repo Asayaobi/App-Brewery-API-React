@@ -3,6 +3,8 @@ const number = Math.ceil(Math.random() * 20)
 console.log(number)
 //initial score
 let score = 20
+//highscore
+let highscore = 0
 
 //check the guess number
 const checkNumber = () => {
@@ -12,6 +14,8 @@ const checkNumber = () => {
         $('body').css('background-color', 'green')
         $('.message').text('correct!')
         $('.score').text(score)
+        highscore++
+        $('.highscore').text(highscore)
     } else if (number > guessNumber) {
         $('.message').text('too low')
         score--
