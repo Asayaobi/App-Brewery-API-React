@@ -1,5 +1,6 @@
 const buttonColors = ["red", "blue", "green", "yellow"]
 const gamePattern = []
+const userClickedPattern = []
 
 const nextSequence = () => {
     //get new color
@@ -12,5 +13,12 @@ const nextSequence = () => {
     const sound = new Audio(`sounds/${randomColor}.mp3`)
     sound.play()
 }
-
 nextSequence()
+
+//when user chooses color
+$('.btn').click(function(e){
+    const userColor = e.target.id
+    userClickedPattern.push(userColor)
+    console.log(userClickedPattern)
+})
+
