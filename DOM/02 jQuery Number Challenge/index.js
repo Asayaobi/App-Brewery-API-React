@@ -1,4 +1,6 @@
-
+//create random number
+const number = Math.ceil(Math.random() * 20)
+console.log(number)
 
 
 
