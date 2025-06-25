@@ -1,6 +1,8 @@
 //create random number
 const number = Math.ceil(Math.random() * 20)
 console.log(number)
+//initial score
+let score = 20
 
 //get the guess number
 $('.check').click(function() {
@@ -10,10 +12,15 @@ $('.check').click(function() {
     if (number == guessNumber){
         $('body').css('background-color', 'green')
         $('.message').text('correct!')
+        $('.score').text(score)
     } else if (number > guessNumber) {
         $('.message').text('too low')
+        score--
+        $('.score').text(score)
     } else {
         $('.message').text('too high')
+        score--
+        $('.score').text(score)
     }
 })
 
