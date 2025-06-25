@@ -10,15 +10,20 @@ const nextSequence = () => {
     //add animation to button
     $(`#${randomColor}`).fadeOut(100).fadeIn(100)
     //add sound
-    const sound = new Audio(`sounds/${randomColor}.mp3`)
-    sound.play()
+    playSound(randomColor)
 }
-nextSequence()
 
 //when user chooses color
-$('.btn').click(function(e){
-    const userColor = e.target.id
+$('.btn').click(function(){
+    const userColor = $(this).attr("id")
     userClickedPattern.push(userColor)
+    playSound(userColor)
     console.log(userClickedPattern)
 })
+
+//play sound
+const playSound = (color) => {
+    const sound = new Audio(`sounds/${color}.mp3`)
+    sound.play()
+}
 
