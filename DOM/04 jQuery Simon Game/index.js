@@ -8,7 +8,7 @@ const nextSequence = () => {
     const randomColor = buttonColors[randomNum]
     gamePattern.push(randomColor)
     //add animation to button
-    $(`#${randomColor}`).fadeOut(100).fadeIn(100)
+    addAnimation(randomColor)
     //add sound
     playSound(randomColor)
 }
@@ -17,8 +17,11 @@ const nextSequence = () => {
 $('.btn').click(function(){
     const userColor = $(this).attr("id")
     userClickedPattern.push(userColor)
-    playSound(userColor)
     console.log(userClickedPattern)
+    //add animation to button
+    addAnimation(userColor)
+    //add sound
+    playSound(userColor)
 })
 
 //play sound
@@ -27,3 +30,5 @@ const playSound = (color) => {
     sound.play()
 }
 
+//add animation
+const addAnimation = (color) => $(`#${color}`).fadeOut(100).fadeIn(100)
