@@ -1,10 +1,21 @@
 //create random number
-const number = Math.ceil(Math.random() * 20)
-console.log(number)
-//initial score
+let number = Math.ceil(Math.random() * 20)
+//set initial score
 let score = 20
 //highscore
 let highscore = 0
+
+//restart the game
+const restart = () => {
+    //reset number
+    number = Math.ceil(Math.random() * 20)
+    //clear input
+    $('.guess').val('')
+    //set initial score
+    score = 20
+    //set background
+    $('body').css('background-color', 'black')
+}
 
 //check the guess number
 const checkNumber = () => {
@@ -35,21 +46,7 @@ $('.guess').keypress(function(e){
     checkNumber()
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$('.again').click(restart)
 
 
 //jQuery note
