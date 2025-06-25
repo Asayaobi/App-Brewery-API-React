@@ -1,6 +1,7 @@
 const buttonColors = ["red", "blue", "green", "yellow"]
 const gamePattern = []
 const userClickedPattern = []
+let level = 0
 
 const nextSequence = () => {
     //get new color
@@ -11,6 +12,9 @@ const nextSequence = () => {
     addAnimation(randomColor)
     //add sound
     playSound(randomColor)
+    //add level
+    level++
+    $('#level-title').text(`Level ${level}`)
 }
 
 //when user chooses color
@@ -32,3 +36,9 @@ const playSound = (color) => {
 
 //add animation
 const addAnimation = (color) => $(`#${color}`).fadeOut(100).fadeIn(100)
+
+//start the game
+$(document).on('keydown', function(){
+    //start sequence
+    nextSequence()
+})
