@@ -6,9 +6,9 @@ let score = 20
 
 //check the guess number
 const checkNumber = () => {
-    let guessNumber = $('.guess').val()
+    let guessNumber = Number($('.guess').val())
 //compare result
-    if (number == guessNumber){
+    if (number === guessNumber){
         $('body').css('background-color', 'green')
         $('.message').text('correct!')
         $('.score').text(score)
@@ -23,8 +23,14 @@ const checkNumber = () => {
     }
 }
 
-
-
+//addEventListener when clicked
+$('.check').click(checkNumber)
+//addEventListener when entered(13)
+$('.guess').keypress(function(e){
+    if(e.which === 13){
+    checkNumber()
+    }
+})
 
 
 
