@@ -1,11 +1,11 @@
 const buttonColors = ["red", "blue", "green", "yellow"]
-const gamePattern = []
-let userClickedPattern = []
+let gamePattern = []
+let userPattern = []
 let level = 0
 
 const nextSequence = () => {
     //clear user pattern
-    userClickedPattern = []
+    userPattern = []
     //get new color
     const randomNum = Math.floor(Math.random() * 4)
     const randomColor = buttonColors[randomNum]
@@ -22,13 +22,13 @@ const nextSequence = () => {
 //when user chooses color
 $('.btn').click(function(){
     const userColor = $(this).attr("id")
-    userClickedPattern.push(userColor)
+    userPattern.push(userColor)
     //add animation to button
     addAnimation(userColor)
     //add sound
     playSound(userColor)
     //check answer
-    checkAnswer(userClickedPattern.length-1)
+    checkAnswer(userPattern.length-1)
 })
 
 //play sound
@@ -48,10 +48,10 @@ $(document).on('keydown', function(){
 
 //check the answer
 const checkAnswer = (currentLevel) => {
-    if (userClickedPattern[currentLevel] === gamePattern[currentLevel]){
+    if (userPattern[currentLevel] === gamePattern[currentLevel]){
         console.log('correct')
         //if user finish all of the pattern
-    if (userClickedPattern.length === gamePattern.length) {
+    if (userPattern.length === gamePattern.length) {
         setTimeout(function() {
             nextSequence()
             console.log(gamePattern)
@@ -65,5 +65,13 @@ const checkAnswer = (currentLevel) => {
         setTimeout(function(){
             $('body').removeClass('game-over')
         },2000)
+        restart()
     }
+}
+
+//restart function to reset the value
+const restart = () => {
+    level = 0
+    gamePattern = []
+    userPattern = []
 }
