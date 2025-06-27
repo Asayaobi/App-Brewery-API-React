@@ -49,22 +49,22 @@ $(document).on('keydown', function(){
 //check the answer
 const checkAnswer = (currentLevel) => {
     if (userPattern[currentLevel] === gamePattern[currentLevel]){
-        console.log('correct')
+        // console.log('correct')
         //if user finish all of the pattern
     if (userPattern.length === gamePattern.length) {
         setTimeout(function() {
             nextSequence()
-            console.log(gamePattern)
+            // console.log(gamePattern)
         }, 1000)
     }
     } else {
-        console.log('wrong')
+        // console.log('wrong')
         playSound('wrong')
         $('body').addClass('game-over')
         $('#level-title').text('Game Over, Press Any Key to Restart')
         setTimeout(function(){
             $('body').removeClass('game-over')
-        },2000)
+        },1500)
         restart()
     }
 }
