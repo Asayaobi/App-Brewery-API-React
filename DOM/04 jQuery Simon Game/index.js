@@ -1,9 +1,11 @@
 const buttonColors = ["red", "blue", "green", "yellow"]
 const gamePattern = []
-const userClickedPattern = []
+let userClickedPattern = []
 let level = 0
 
 const nextSequence = () => {
+    //clear user pattern
+    userClickedPattern = []
     //get new color
     const randomNum = Math.floor(Math.random() * 4)
     const randomColor = buttonColors[randomNum]
@@ -21,7 +23,6 @@ const nextSequence = () => {
 $('.btn').click(function(){
     const userColor = $(this).attr("id")
     userClickedPattern.push(userColor)
-    console.log(userClickedPattern)
     //add animation to button
     addAnimation(userColor)
     //add sound
@@ -49,6 +50,13 @@ $(document).on('keydown', function(){
 const checkAnswer = (currentLevel) => {
     if (userClickedPattern[currentLevel] === gamePattern[currentLevel]){
         console.log('correct')
+        //if user finish all of the pattern
+    if (userClickedPattern.length === gamePattern.length) {
+        setTimeout(function() {
+            nextSequence()
+            console.log(gamePattern)
+        }, 1000)
+    }
     } else {
         console.log('wrong')
     }
