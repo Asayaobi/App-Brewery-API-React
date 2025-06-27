@@ -8,7 +8,10 @@ const fs = require('fs');
 // });
 
 //read file : readFile('/etc/passwd', 'utf8', callback); 
-fs.readFile('./message.txt','utf8', (err, data) => {
-  if (err) throw err;
-  console.log(data);
-});
+// fs.readFile('./message.txt','utf8', (err, data) => {
+//   if (err) throw err;
+//   console.log(data);
+// });
+
+//install npm package - npm init
+//install npm sillyname - npm i sillyname

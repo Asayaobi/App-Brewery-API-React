@@ -1,0 +1,15 @@
+{
+  "name": "testing-npm-package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "sillyname": "^0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "asaya",
+  "license": "ISC"
+}
