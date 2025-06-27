@@ -15,3 +15,8 @@ const fs = require('fs');
 
 //install npm package - npm init
 //install npm sillyname - npm i sillyname
+
+//common js
+var generateName = require('sillyname');
+var sillyName = generateName();
+console.log(`my name is ${sillyName}`)//my name is Hailterrier Fancier
