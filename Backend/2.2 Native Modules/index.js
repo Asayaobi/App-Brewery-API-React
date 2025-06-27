@@ -21,7 +21,12 @@
 // var sillyName = generateName();
 // console.log(`my name is ${sillyName}`)//my name is Hailterrier Fancier
 
-//add "type":"module" in package.json for ES Module style
+//ES Module style - add "type":"module" in package.json 
 import generateName from "sillyname";
-var sillyName = generateName();
+const sillyName = generateName();
 console.log(`my name is ${sillyName}`); //my name is Gravelfish Falcon
+
+//add superhero names package -npm i superheroes
+import {randomSuperhero} from 'superheroes';
+const superheroName = randomSuperhero();//my name is Flintgull Biter
+console.log(`I am ${superheroName} !`);//I am Thor Girl !
