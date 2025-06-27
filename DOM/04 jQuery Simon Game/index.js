@@ -26,6 +26,8 @@ $('.btn').click(function(){
     addAnimation(userColor)
     //add sound
     playSound(userColor)
+    //check answer
+    checkAnswer(userClickedPattern.length-1)
 })
 
 //play sound
@@ -42,3 +44,12 @@ $(document).on('keydown', function(){
     //start sequence
     nextSequence()
 })
+
+//check the answer
+const checkAnswer = (currentLevel) => {
+    if (userClickedPattern[currentLevel] === gamePattern[currentLevel]){
+        console.log('correct')
+    } else {
+        console.log('wrong')
+    }
+}
