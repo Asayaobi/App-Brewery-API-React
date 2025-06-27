@@ -1,5 +1,5 @@
 //using File system module
-const fs = require('fs');
+//const fs = require('fs');
 
 //write file : fs.writeFile(file, data[, options], callback)de 
 // fs.writeFile('message.txt', 'Hello from Node JS', (err) => {
@@ -17,6 +17,11 @@ const fs = require('fs');
 //install npm sillyname - npm i sillyname
 
 //common js
-var generateName = require('sillyname');
+// var generateName = require('sillyname');
+// var sillyName = generateName();
+// console.log(`my name is ${sillyName}`)//my name is Hailterrier Fancier
+
+//add "type":"module" in package.json for ES Module style
+import generateName from "sillyname";
 var sillyName = generateName();
-console.log(`my name is ${sillyName}`)//my name is Hailterrier Fancier
+console.log(`my name is ${sillyName}`); //my name is Gravelfish Falcon
