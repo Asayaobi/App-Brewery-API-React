@@ -6,15 +6,14 @@ inquirer
   .prompt([
     /* Pass your questions in here */
     {
-    type: 'input',           // Use the input type
     name: 'userInput',       // Name to store the answer
-    message: 'type your website here'         // No message displaye      
+    message: 'type your URL here'         // No message displaye      
     }
   ])
   .then((answers) => {
     // Get user website
+    //console.log(answers); {userInput: www.google.com}
     const userWebsite = answers.userInput;
-    console.log('You typed:', userWebsite);
     //2.Use the qr-image npm package to turn the user entered URL into a QR code image.
     const qr_svg = qr.image(userWebsite, { type: 'png' });
     qr_svg.pipe(fs.createWriteStream('qrcode.png'));
