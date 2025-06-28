@@ -1,5 +1,6 @@
 import inquirer from 'inquirer';
 import qr from 'qr-image';
+import fs from 'fs';
 
 inquirer
   .prompt([
@@ -11,9 +12,12 @@ inquirer
     }
   ])
   .then((answers) => {
-    // Use user feedback for... whatever!!
+    // Get user website
     const userWebsite = answers.userInput;
     console.log('You typed:', userWebsite);
+    //2.Use the qr-image npm package to turn the user entered URL into a QR code image.
+    const qr_svg = qr.image(userWebsite, { type: 'png' });
+    qr_svg.pipe(fs.createWriteStream('qrcode.png'));
   })
   .catch((error) => {
     if (error.isTtyError) {
