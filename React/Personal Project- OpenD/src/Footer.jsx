@@ -12,7 +12,7 @@ function Footer() {
           <Row>
             <Col>
               <p>
-                The Internet Computer`&apos;`s largest digital marketplace for crypto
+                The Internet Computer&apos;s largest digital marketplace for crypto
                 collectibles and non-fungible tokens (NFTs). Buy, sell, and
                 discover exclusive digital items.
               </p>
