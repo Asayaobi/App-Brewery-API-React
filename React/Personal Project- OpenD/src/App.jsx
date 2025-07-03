@@ -1,6 +1,7 @@
 import './App.css'
 import Header from './Header'
 import homeImage from "/home-img.png"
+import Footer from './Footer'
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
     <>
     <Header />
     <img className="bottom-space" src={homeImage} />
+    <Footer />
     </>
   )
 }
