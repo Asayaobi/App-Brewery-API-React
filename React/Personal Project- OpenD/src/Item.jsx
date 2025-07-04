@@ -11,7 +11,7 @@ function Item(props) {
         />
         <div className="disCardContent-root">
           <h2 className="disTypography-root makeStyles-bodyText-24 disTypography-h5 disTypography-gutterBottom">
-            {props.artist} #{props.id}<span className="purple-text"></span>
+            {props.title}<span className="purple-text"></span>
           </h2>
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: {props.owner}
@@ -24,8 +24,7 @@ function Item(props) {
 
 Item.propTypes = {
   img: PropTypes.string.isRequired,
-  artist: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
   owner: PropTypes.string.isRequired,
 }
 
