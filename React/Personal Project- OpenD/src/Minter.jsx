@@ -1,8 +1,11 @@
 import { useForm } from "react-hook-form"
 import { useState, useEffect } from "react"
+import Item from "./Item"
+
 
 function Minter() {
   const { register, handleSubmit, watch } = useForm()
+  const [title, setTitle] = useState("")
   const [img, setImg] = useState(null)
   const [isMinted, setIsMinted] = useState(false)
 
@@ -16,7 +19,8 @@ function Minter() {
   }, [watchImage])
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data)//Form Data: {image: FileList, name: 'Cryptoduck001'}
+    console.log("Form Data:", data.name)//Form Data: {image: FileList, name: 'Cryptoduck001'}
+    setTitle(data.name)
     console.log("Image file object:", img.name) //cryptodunk5.png
     setIsMinted(true)
   };
@@ -72,6 +76,9 @@ function Minter() {
         <h3 className="Typography-root makeStyles-title-99 Typography-h3 form-Typography-gutterBottom">
           Minted!
         </h3>
+          <div className="horizontal-center">
+          <Item owner="currentUser" title={title} img={URL.createObjectURL(img)}/>
+        </div>
       </div>
     )
   }
