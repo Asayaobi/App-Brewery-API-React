@@ -1,5 +1,8 @@
 import logo from "/logo.png"
-import {BrowserRouter, Link} from "react-router-dom"
+import {BrowserRouter, Link, Routes, Route} from "react-router-dom"
+import homeImage from "/home-img.png"
+import Minter from "./Minter"
+import Gallery from "./Gallery"
 
 function Header() {
   return (
@@ -10,7 +13,9 @@ function Header() {
           <div className="header-left-4"></div>
           <img className="header-logo-11" src={logo} />
           <div className="header-vertical-9"></div>
+          <Link to="/">
           <h5 className="Typography-root header-logo-text">OpenD</h5>
+          </Link>
           <div className="header-empty-6"></div>
           <div className="header-space-8"></div>
           <button className="ButtonBase-root Button-root Button-text header-navButtons-3">
@@ -25,6 +30,12 @@ function Header() {
         </div>
       </header>
     </div>
+    <Routes>
+      <Route path="/" element={<img className="bottom-space" src={homeImage} />}/>
+      <Route path="/discover" element={<h1>Discover</h1>} /> 
+      <Route path="/minter" element ={<Minter />} />
+      <Route path="/collection" element ={<Gallery />} />
+    </Routes>
     </BrowserRouter>
   )
 }
