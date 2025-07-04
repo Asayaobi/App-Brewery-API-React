@@ -31,9 +31,9 @@ function Minter(props) {
       img: imageUrl,
       owner: "currentUser"
     }
-
+    console.log(`minter nft: ${newNft}`)
     props.addNft(newNft)
-    setIsMinted({ title: data.name, img: imageUrl })
+    setIsMinted({ title: data.name, img: imageUrl, owner: "currentUser" })
     setLoaderHidden(true)
   }
 
@@ -98,7 +98,7 @@ function Minter(props) {
           Minted!
         </h3>
           <div className="horizontal-center">
-          <Item owner="currentUser" title={isMinted.title} img={isMinted.img}/>
+          <Item owner="currentUser" data={isMinted}/>
         </div>
       </div>
     )
