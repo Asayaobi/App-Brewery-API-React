@@ -9,6 +9,7 @@ function Minter(props) {
   const { register, handleSubmit, watch } = useForm()
   const [img, setImg] = useState(null)
   const [isMinted, setIsMinted] = useState(null)
+  const [loaderHidden, setLoaderHidden] = useState(true)
 
   const watchImage = watch("image")
 
@@ -20,6 +21,7 @@ function Minter(props) {
   }, [watchImage])
 
   const onSubmit = (data) => {
+    setLoaderHidden(false)
     // console.log("Form Data:", data.name)//Form Data: {image: FileList, name: 'Cryptoduck001'}
     // console.log("Image file object:", img.name) //cryptodunk5.png
     const imageUrl = URL.createObjectURL(img)
@@ -32,11 +34,21 @@ function Minter(props) {
 
     props.addNft(newNft)
     setIsMinted({ title: data.name, img: imageUrl })
+    setLoaderHidden(true)
   }
 
   if (!isMinted){
       return (
     <div className="minter-container">
+
+      {/* loader */}
+      <div className="lds-ellipsis" hidden ={loaderHidden}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
       <h3 className="makeStyles-title-99 Typography-h3 form-Typography-gutterBottom">
         Create NFT
       </h3>
