@@ -3,8 +3,17 @@ import {BrowserRouter, Link, Routes, Route} from "react-router-dom"
 import homeImage from "/home-img.png"
 import Minter from "./Minter"
 import Gallery from "./Gallery"
+import nfts from '../data'
+import { useState } from 'react'
+
 
 function Header() {
+  const [data, setData] = useState(nfts)
+
+  function updateData(newNft){
+    console.log(newNft)
+    setData([newNft, ...data])
+  }
   return (
     <BrowserRouter>
     <div className="app-root-1">
@@ -33,8 +42,8 @@ function Header() {
     <Routes>
       <Route path="/" element={<img className="bottom-space" src={homeImage} />}/>
       <Route path="/discover" element={<h1>Discover</h1>} /> 
-      <Route path="/minter" element ={<Minter />} />
-      <Route path="/collection" element ={<Gallery />} />
+      <Route path="/minter" element ={<Minter addNft={updateData}/>} />
+      <Route path="/collection" element ={<Gallery data={data.filter(d => d.owner == "currentUser")}/>} />
     </Routes>
     </BrowserRouter>
   )
