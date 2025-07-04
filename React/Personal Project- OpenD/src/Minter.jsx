@@ -1,13 +1,14 @@
 import { useForm } from "react-hook-form"
 import { useState, useEffect } from "react"
 import Item from "./Item"
+import PropTypes from "prop-types"
 
 
-function Minter() {
+
+function Minter(props) {
   const { register, handleSubmit, watch } = useForm()
-  const [title, setTitle] = useState("")
   const [img, setImg] = useState(null)
-  const [isMinted, setIsMinted] = useState(false)
+  const [isMinted, setIsMinted] = useState(null)
 
   const watchImage = watch("image")
 
@@ -19,11 +20,19 @@ function Minter() {
   }, [watchImage])
 
   const onSubmit = (data) => {
-    console.log("Form Data:", data.name)//Form Data: {image: FileList, name: 'Cryptoduck001'}
-    setTitle(data.name)
-    console.log("Image file object:", img.name) //cryptodunk5.png
-    setIsMinted(true)
-  };
+    // console.log("Form Data:", data.name)//Form Data: {image: FileList, name: 'Cryptoduck001'}
+    // console.log("Image file object:", img.name) //cryptodunk5.png
+    const imageUrl = URL.createObjectURL(img)
+
+    const newNft = {
+      title: data.name,
+      img: imageUrl,
+      owner: "currentUser"
+    }
+
+    props.addNft(newNft)
+    setIsMinted({ title: data.name, img: imageUrl })
+  }
 
   if (!isMinted){
       return (
@@ -77,11 +86,14 @@ function Minter() {
           Minted!
         </h3>
           <div className="horizontal-center">
-          <Item owner="currentUser" title={title} img={URL.createObjectURL(img)}/>
+          <Item owner="currentUser" title={isMinted.title} img={isMinted.img}/>
         </div>
       </div>
     )
   }
 }
 
+Minter.propTypes = {
+  addNft: PropTypes.func.isRequired,
+}
 export default Minter
