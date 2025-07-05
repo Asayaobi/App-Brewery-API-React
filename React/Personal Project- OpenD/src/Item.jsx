@@ -1,8 +1,19 @@
+import {useState} from "react"
 import PropTypes from 'prop-types'
 import Button from './Button'
 function Item(props) {
+  const [priceInput, setPriceInput] = useState()
+  let price
+
   function handleSell(){
     console.log('sell clicked')
+    setPriceInput(<input
+        placeholder="Price in ETH"
+        type="number"
+        className="price-input"
+        value={price}
+        onChange={(e) => (price = e.target.value)}
+      />)
   }
   return (
     <div className="disGrid-item">
@@ -18,6 +29,7 @@ function Item(props) {
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: {props.data.owner}
           </p>
+          {priceInput}
           {props.data.owner === "currentUser" && <Button handleClick={handleSell}/>}
         </div>
       </div>
