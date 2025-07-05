@@ -4,7 +4,9 @@ import Button from './Button'
 function Item(props) {
   const [priceInput, setPriceInput] = useState()
   const [buttonText, setButtonText] = useState("Sell")
-  let price
+  const [isOnSell, setIsOnSell] = useState(false)
+  const [price, setPrice] = useState()
+
 
 
   function handleSell(){
@@ -14,9 +16,15 @@ function Item(props) {
         type="number"
         className="price-input"
         value={price}
-        onChange={(e) => (price = e.target.value)}
+        onChange={(e) => (setPrice(e.target.value))}
       />)
       setButtonText("Confirm")
+      setIsOnSell(true)
+  }
+
+  function upDateNft(){
+    const editNft = { title: props.data.title, img: props.data.img, owner: "currentUser", price: price }
+    console.log(editNft)
   }
   return (
     <div className="disGrid-item">
@@ -33,7 +41,10 @@ function Item(props) {
             Owner: {props.data.owner}
           </p>
           {priceInput}
-          {props.data.owner === "currentUser" && <Button handleClick={handleSell} text={buttonText}/>}
+          {props.data.owner === "currentUser" && isOnSell ?
+        <Button handleClick={upDateNft} text={buttonText}/> :
+        <Button handleClick={handleSell} text={buttonText}/>
+        }
         </div>
       </div>
     </div>
