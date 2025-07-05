@@ -5,7 +5,7 @@ function Button(props){
               onClick={props.handleClick}
               className="form-Chip-label"
             >
-              Sell
+              {props.text}
             </span>
             </div>
     )

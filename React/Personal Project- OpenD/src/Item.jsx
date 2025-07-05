@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import Button from './Button'
 function Item(props) {
   const [priceInput, setPriceInput] = useState()
+  const [buttonText, setButtonText] = useState("Sell")
   let price
+
 
   function handleSell(){
     console.log('sell clicked')
@@ -14,6 +16,7 @@ function Item(props) {
         value={price}
         onChange={(e) => (price = e.target.value)}
       />)
+      setButtonText("Confirm")
   }
   return (
     <div className="disGrid-item">
@@ -30,7 +33,7 @@ function Item(props) {
             Owner: {props.data.owner}
           </p>
           {priceInput}
-          {props.data.owner === "currentUser" && <Button handleClick={handleSell}/>}
+          {props.data.owner === "currentUser" && <Button handleClick={handleSell} text={buttonText}/>}
         </div>
       </div>
     </div>
