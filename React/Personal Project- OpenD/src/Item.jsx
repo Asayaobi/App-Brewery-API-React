@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types'
-
+import Button from './Button'
 function Item(props) {
+  function handleSell(){
+    console.log('sell clicked')
+  }
   return (
     <div className="disGrid-item">
       <div className="disPaper-root disCard-root makeStyles-root-17 disPaper-elevation1 disPaper-rounded">
@@ -15,6 +18,7 @@ function Item(props) {
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: {props.data.owner}
           </p>
+          {props.data.owner === "currentUser" && <Button handleClick={handleSell}/>}
         </div>
       </div>
     </div>
