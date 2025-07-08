@@ -23,8 +23,8 @@ function Item(props) {
   }
 
   function upDateNft(){
-    const editNft = { title: props.data.title, img: props.data.img, owner: "currentUser", price: price }
-    console.log(editNft)
+    const editNft = { title: props.data.title, img: props.data.img, owner: "openD", price: price }
+    console.log(`sellNFT: ${editNft.title} ${editNft.owner} ${editNft.price}`)
   }
   return (
     <div className="disGrid-item">
