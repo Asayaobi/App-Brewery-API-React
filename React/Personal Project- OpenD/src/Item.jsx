@@ -2,11 +2,14 @@ import {useState} from "react"
 import PropTypes from 'prop-types'
 import Button from './Button'
 function Item(props) {
+  const seller = props.data.owner
+
   const [priceInput, setPriceInput] = useState()
   const [buttonText, setButtonText] = useState("Sell")
   const [isOnSell, setIsOnSell] = useState(false)
   const [price, setPrice] = useState()
   const [hidden, setHidden] = useState(false)
+  const [owner, setOwner] = useState(seller)
 
 
 
@@ -27,6 +30,7 @@ function Item(props) {
     const editNft = { title: props.data.title, img: props.data.img, owner: "openD", price: price }
     console.log(`sellNFT: ${editNft.title} ${editNft.owner} ${editNft.price}`)
     setHidden(true)
+    setOwner("openD")
   }
   return (
     <div className="disGrid-item">
@@ -40,7 +44,7 @@ function Item(props) {
             {props.data.title}<span className="purple-text"></span>
           </h2>
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
-            Owner: {props.data.owner}
+            Owner: {owner}
           </p>
           <div hidden={hidden}>
             {priceInput}
