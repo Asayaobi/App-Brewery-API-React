@@ -98,7 +98,7 @@ function Minter(props) {
           Minted!
         </h3>
           <div className="horizontal-center">
-          <Item owner="currentUser" data={isMinted}/>
+          <Item owner="currentUser" data={isMinted} hideButton={true}/>
         </div>
       </div>
     )

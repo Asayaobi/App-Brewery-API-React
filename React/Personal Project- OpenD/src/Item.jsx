@@ -11,8 +11,6 @@ function Item(props) {
   const [hidden, setHidden] = useState(false)
   const [owner, setOwner] = useState(seller)
 
-
-
   function handleSell(){
     console.log('sell clicked')
     setPriceInput(<input
@@ -46,13 +44,16 @@ function Item(props) {
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: {owner}
           </p>
-          <div hidden={hidden}>
-            {priceInput}
-          {props.data.owner === "currentUser" && isOnSell ?
-        <Button handleClick={upDateNft} text={buttonText}/> :
-        <Button handleClick={handleSell} text={buttonText}/>
-        }
-          </div>
+            {!props.hideButton && !hidden && (
+              <div>
+                {priceInput}
+                {props.data.owner === "currentUser" && isOnSell ? (
+                  <Button handleClick={upDateNft} text={buttonText} />
+                ) : (
+                  <Button handleClick={handleSell} text={buttonText} />
+                )}
+              </div>
+            )}
         </div>
       </div>
     </div>
