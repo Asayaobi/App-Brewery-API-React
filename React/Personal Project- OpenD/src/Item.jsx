@@ -6,6 +6,7 @@ function Item(props) {
   const [buttonText, setButtonText] = useState("Sell")
   const [isOnSell, setIsOnSell] = useState(false)
   const [price, setPrice] = useState()
+  const [hidden, setHidden] = useState(false)
 
 
 
@@ -25,6 +26,7 @@ function Item(props) {
   function upDateNft(){
     const editNft = { title: props.data.title, img: props.data.img, owner: "openD", price: price }
     console.log(`sellNFT: ${editNft.title} ${editNft.owner} ${editNft.price}`)
+    setHidden(true)
   }
   return (
     <div className="disGrid-item">
@@ -40,11 +42,13 @@ function Item(props) {
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: {props.data.owner}
           </p>
-          {priceInput}
+          <div hidden={hidden}>
+            {priceInput}
           {props.data.owner === "currentUser" && isOnSell ?
         <Button handleClick={upDateNft} text={buttonText}/> :
         <Button handleClick={handleSell} text={buttonText}/>
         }
+          </div>
         </div>
       </div>
     </div>
