@@ -10,6 +10,7 @@ function Item(props) {
   const [price, setPrice] = useState()
   const [hidden, setHidden] = useState(false)
   const [owner, setOwner] = useState(seller)
+  const [blur, setBlur] = useState()
 
   function handleSell(){
     console.log('sell clicked')
@@ -29,6 +30,7 @@ function Item(props) {
     console.log(`sellNFT: ${editNft.title} ${editNft.owner} ${editNft.price}`)
     setHidden(true)
     setOwner("openD")
+    setBlur({filter:"blur(4px)"})
   }
   return (
     <div className="disGrid-item">
@@ -36,6 +38,7 @@ function Item(props) {
         <img
           className="disCardMedia-root makeStyles-image-19 disCardMedia-media disCardMedia-img"
           src={props.data.img}
+          style={blur}
         />
         <div className="disCardContent-root">
           <h2 className="disTypography-root makeStyles-bodyText-24 disTypography-h5 disTypography-gutterBottom">
