@@ -11,6 +11,7 @@ function Item(props) {
   const [hidden, setHidden] = useState(false)
   const [owner, setOwner] = useState(seller)
   const [blur, setBlur] = useState()
+  const [listedText, setListedText] = useState()
 
   function handleSell(){
     console.log('sell clicked')
@@ -31,6 +32,7 @@ function Item(props) {
     setHidden(true)
     setOwner("openD")
     setBlur({filter:"blur(4px)"})
+    setListedText("Listed")
   }
   return (
     <div className="disGrid-item">
@@ -42,7 +44,7 @@ function Item(props) {
         />
         <div className="disCardContent-root">
           <h2 className="disTypography-root makeStyles-bodyText-24 disTypography-h5 disTypography-gutterBottom">
-            {props.data.title}<span className="purple-text"></span>
+            {props.data.title}<span className="purple-text"> {listedText}</span>
           </h2>
           <p className="disTypography-root makeStyles-bodyText-24 disTypography-body2 disTypography-colorTextSecondary">
             Owner: {owner}
