@@ -12,7 +12,14 @@ function Header() {
 
   function updateData(newNft){
     console.log(newNft)
-    setData([newNft, ...data])
+    const nft = {
+      id: data.length + 1,
+      title: newNft.title,
+      img: newNft.img,
+      owner: newNft.owner,
+      price: 0
+    }
+    setData([nft, ...data])
   }
   return (
     <BrowserRouter forceRefresh={true}>
