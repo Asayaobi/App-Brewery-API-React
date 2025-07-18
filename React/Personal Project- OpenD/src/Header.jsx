@@ -11,7 +11,7 @@ function Header() {
   const [data, setData] = useState(nfts)
 
   function updateData(newNft){
-    console.log(newNft)
+    // console.log(newNft)
     const nft = {
       id: data.length + 1,
       title: newNft.title,
@@ -23,7 +23,16 @@ function Header() {
   }
 
   function updatePrice(nft){
-    console.log(nft.id)
+    // console.log(`addprice to ${nft.id}`)
+    data.map(item => {
+      if (item.id == nft.id){
+        return {...item,
+        price: nft.price,
+        owner: nft.owner}
+      }
+      return item
+    }
+ )
   }
   return (
     <BrowserRouter forceRefresh={true}>
@@ -52,6 +61,7 @@ function Header() {
     </div>
     <Routes>
       <Route path="/" element={<img className="bottom-space" src={homeImage} />}/>
+      {/* <Route path="/discover" element={<Gallery data={data.map(d => d)}/>} />  */}
       <Route path="/discover" element={<h1>Discover</h1>} /> 
       <Route path="/minter" element ={<Minter addNft={updateData}/>} />
       <Route path="/collection" element ={<Gallery data={data.filter(d => d.owner == "currentUser")} addPrice={updatePrice}/>} />
