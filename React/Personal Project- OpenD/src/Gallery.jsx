@@ -9,7 +9,7 @@ function Gallery(props) {
       <div className="disGrid-root disGrid-container disGrid-spacing-xs-2">
         <div className="disGrid-root disGrid-item disGrid-grid-xs-12">
           <div className="disGrid-root disGrid-container disGrid-spacing-xs-5 disGrid-justify-content-xs-center">
-            {props.data && props.data.map((d,index) => <Item key={index} data={d}/>)}
+            {props.data && props.data.map((d,index) => <Item key={index} data={d} addPrice={props.addPrice}/>)}
           </div>
         </div>
       </div>
