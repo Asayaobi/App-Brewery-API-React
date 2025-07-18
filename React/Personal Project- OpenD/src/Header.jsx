@@ -21,6 +21,10 @@ function Header() {
     }
     setData([nft, ...data])
   }
+
+  function updatePrice(nft){
+    console.log(nft.id)
+  }
   return (
     <BrowserRouter forceRefresh={true}>
     <div className="app-root-1">
@@ -50,7 +54,7 @@ function Header() {
       <Route path="/" element={<img className="bottom-space" src={homeImage} />}/>
       <Route path="/discover" element={<h1>Discover</h1>} /> 
       <Route path="/minter" element ={<Minter addNft={updateData}/>} />
-      <Route path="/collection" element ={<Gallery data={data.filter(d => d.owner == "currentUser")}/>} />
+      <Route path="/collection" element ={<Gallery data={data.filter(d => d.owner == "currentUser")} addPrice={updatePrice}/>} />
     </Routes>
     </BrowserRouter>
   )
