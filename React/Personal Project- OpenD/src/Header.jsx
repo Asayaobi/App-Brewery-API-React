@@ -68,7 +68,7 @@ function Header() {
       <Route path="/" element={<img className="bottom-space" src={homeImage} />}/>
       <Route path="/discover" element={listedNft} /> 
       <Route path="/minter" element ={<Minter addNft={updateData}/>} />
-      <Route path="/collection" element ={<Gallery data={data.filter(d => d.owner == "currentUser")} addPrice={updatePrice}/>} />
+      <Route path="/collection" element ={<Gallery title="My NFTs" data={data.filter(d => d.owner == "currentUser")} addPrice={updatePrice}/>} />
     </Routes>
     </BrowserRouter>
   )
