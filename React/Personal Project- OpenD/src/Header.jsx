@@ -9,9 +9,9 @@ import { useState } from 'react'
 
 function Header() {
   const [data, setData] = useState(nfts)
+  const [listedNft, setListedNft] = useState(<Gallery title="Discover" data={data.map(d => d)}/>)
 
   function updateData(newNft){
-    // console.log(newNft)
     const nft = {
       id: data.length + 1,
       title: newNft.title,
@@ -19,7 +19,12 @@ function Header() {
       owner: newNft.owner,
       price: 0
     }
-    setData([nft, ...data])
+    // Update data and listedNft in the same callback
+    setData(prevData => {
+      const updatedData = [nft, ...prevData]
+      setListedNft(<Gallery title="Discover" data={updatedData} />)
+      return updatedData
+    })
   }
 
   function updatePrice(nft){
@@ -61,8 +66,7 @@ function Header() {
     </div>
     <Routes>
       <Route path="/" element={<img className="bottom-space" src={homeImage} />}/>
-      {/* <Route path="/discover" element={<Gallery data={data.map(d => d)}/>} />  */}
-      <Route path="/discover" element={<h1>Discover</h1>} /> 
+      <Route path="/discover" element={listedNft} /> 
       <Route path="/minter" element ={<Minter addNft={updateData}/>} />
       <Route path="/collection" element ={<Gallery data={data.filter(d => d.owner == "currentUser")} addPrice={updatePrice}/>} />
     </Routes>
