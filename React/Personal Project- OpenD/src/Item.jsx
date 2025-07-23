@@ -27,11 +27,11 @@ function Item(props) {
   }
 
   function upDateNft(){
-    const editNft = { id: props.data.id, title: props.data.title, img: props.data.img, owner: "openD", price: price }
+    const editNft = { id: props.data.id, title: props.data.title, img: props.data.img, owner: "OpenD", price: price }
     console.log(`sellNFT: ${editNft.id}${editNft.title} ${editNft.owner} ${editNft.price}`)
     props.addPrice(editNft)
     setHidden(true)
-    setOwner("openD")
+    setOwner("OpenD")
     setBlur({filter:"blur(4px)"})
     setListedText("Listed")
   }
