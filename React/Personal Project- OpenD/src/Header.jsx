@@ -9,7 +9,6 @@ import { useState } from 'react'
 
 function Header() {
   const [data, setData] = useState(nfts)
-  const [listedNft, setListedNft] = useState(<Gallery title="Discover" data={data.map(d => d)}/>)
 
   function updateData(newNft){
     const nft = {
@@ -19,25 +18,15 @@ function Header() {
       owner: newNft.owner,
       price: 0
     }
-    // Update data and listedNft in the same callback
-    setData(prevData => {
-      const updatedData = [nft, ...prevData]
-      setListedNft(<Gallery title="Discover" data={updatedData} />)
-      return updatedData
-    })
+    setData(prevData => [nft, ...prevData])
   }
 
-  function updatePrice(nft){
-    // console.log(`addprice to ${nft.id}`)
-    data.map(item => {
-      if (item.id == nft.id){
-        return {...item,
-        price: nft.price,
-        owner: nft.owner}
-      }
-      return item
-    }
- )
+  function updatePrice(nft) {
+    setData(prevData =>
+      prevData.map(item =>
+        item.id === nft.id ? { ...item, price: nft.price, owner: nft.owner } : item
+      )
+    )
   }
   return (
     <BrowserRouter forceRefresh={true}>
