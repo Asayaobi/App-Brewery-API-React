@@ -28,6 +28,9 @@ function Header() {
       )
     )
   }
+
+  const discoverData = data.filter(d => d.owner === "OpenD")
+
   return (
     <BrowserRouter forceRefresh={true}>
     <div className="app-root-1">
@@ -55,7 +58,7 @@ function Header() {
     </div>
     <Routes>
       <Route path="/" element={<img className="bottom-space" src={homeImage} />}/>
-      <Route path="/discover" element={listedNft} /> 
+      <Route path="/discover" element={<Gallery title="Discover" data={discoverData} />} />
       <Route path="/minter" element ={<Minter addNft={updateData}/>} />
       <Route path="/collection" element ={<Gallery title="My NFTs" data={data.filter(d => d.owner == "currentUser")} addPrice={updatePrice}/>} />
     </Routes>
