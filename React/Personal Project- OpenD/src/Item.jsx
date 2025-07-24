@@ -5,8 +5,7 @@ function Item(props) {
   const seller = props.data.owner
 
   const [priceInput, setPriceInput] = useState()
-  const [buttonText, setButtonText] = useState("Sell")
-  const [isOnSell, setIsOnSell] = useState(false)
+  const [button, setButton] = useState(<Button handleClick={handleSell} text={"Sell"} />)
   const [price, setPrice] = useState()
   const [hidden, setHidden] = useState(false)
   const [owner, setOwner] = useState(seller)
@@ -22,13 +21,19 @@ function Item(props) {
         value={price}
         onChange={(e) => (setPrice(e.target.value))}
       />)
-      setButtonText("Confirm")
-      setIsOnSell(true)
+      setButton(<Button handleClick={updateNft} text={"Confirm"} />)
   }
 
-  function upDateNft(){
-    const editNft = { id: props.data.id, title: props.data.title, img: props.data.img, owner: "OpenD", price: price }
-    console.log(`sellNFT: ${editNft.id}${editNft.title} ${editNft.owner} ${editNft.price}`)
+  function updateNft(){
+    const editNft = { 
+      id: props.data.id, 
+      title: props.data.title, 
+      img: props.data.img, 
+      owner: "OpenD", 
+      price: price }
+
+    console.log(`listed nft: ${editNft.id} ${editNft.title} ${editNft.owner} ${editNft.price}`)
+
     props.addPrice(editNft)
     setHidden(true)
     setOwner("OpenD")
@@ -53,11 +58,7 @@ function Item(props) {
             {!props.hideButton && !hidden && (
               <div>
                 {priceInput}
-                {props.data.owner === "currentUser" && isOnSell ? (
-                  <Button handleClick={upDateNft} text={buttonText} />
-                ) : (
-                  <Button handleClick={handleSell} text={buttonText} />
-                )}
+                {button}
               </div>
             )}
         </div>
@@ -70,7 +71,7 @@ Item.propTypes = {
   data: PropTypes.shape({
     title: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
-    owner: PropTypes.string.isRequired
+    owner: PropTypes.string.isRequired,
   }).isRequired
 }
 
